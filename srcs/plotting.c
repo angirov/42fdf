@@ -5,59 +5,83 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/07 14:20:04 by vangirov          #+#    #+#             */
-/*   Updated: 2022/05/07 18:19:19 by vangirov         ###   ########.fr       */
+/*   Created: 2022/05/08 10:04:57 by vangirov          #+#    #+#             */
+/*   Updated: 2022/05/08 11:41:26 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "fdf.h"
 #define ABS(a) ((a < 0) ? -a : a)
-#define SLOPE(x0 ,x1) ((x0 < x1) ? 1 : -1)
-#define COLOR 0xffffff
+#define MAX(a, b) ((a > b) ? a : b)
+#define WHITE 0xffffff
+#define RED 0xe80c0c
 
-void	plot_line(int x0, int y0, int x1, int y1, t_fdf *data)
+void	plot_line(float x, float y, float x1, float y1, t_fdf *data)
 {
-	int	dx;
-	int	dy;
-	int	sx;
-	int	sy;
-	int	err;
-	// int	err2;
+	float	dx;
+	float	dy;
+	float max;
+	int	z;
+	int	z1;
 
-	dx = ABS(x1 - x0);
-	dy = -ABS(y1 - y0);
-	sx = SLOPE(x0, x1);
-	sy = SLOPE(y0, y1);
-	err = dx + dy;
+	z = data->z_matrix[(int)y][(int)x];
+	z1 = data->z_matrix[(int)y1][(int)x1];
 
-	mlx_pixel_put(data->mlx_ptr, data->win_ptr, x0, y0, COLOR);
-	while (!(x0 == x1 && y0 == y1))
+	x *= data->zoom;
+	x1 *= data->zoom;
+	y *= data->zoom;
+	y1 *= data->zoom;
+
+	data->color = (z || z1) ? RED : WHITE;
+	// data->color = WHITE;
+
+	isomeric(&x, &y, z);
+	isomeric(&x1, &y1, z1);
+	
+	x += data->shift_x;
+	y += data->shift_y;
+	x1 += data->shift_x;
+	y1 += data->shift_y;
+	
+	dx = x1 - x;
+	dy = y1 - y;
+	max = MAX(ABS(dx), ABS(dy));
+	dx /= max;
+	dy /= max;
+
+	while ((int)(x - x1) || (int)(y - y1))
 	{
-		// err2 = 2 * err;
-		if (err*2 > dy)
-		{
-			err += dy;
-			x0 += sx;
-		}
-		if (err*2 < dx)
-		{
-			err += dx;
-			y0 +=sy;
-		}
-		mlx_pixel_put(data->mlx_ptr, data->win_ptr, x0, y0, COLOR);
+		mlx_pixel_put(data->mlx_ptr, data->win_ptr, x, y, data->color);
+		x += dx;
+		y += dy;
 	}
 }
 
-// plotLine(x0, y0, x1, y1)
-//     dx = x1 - x0
-//     dy = y1 - y0
-//     D = 2*dy - dx
-//     y = y0
+void	plot_map(t_fdf *data)
+{
+	int	y;
+	int	x;
 
-//     for x from x0 to x1
-//         plot(x,y)
-//         if D > 0
-//             y = y + 1
-//             D = D - 2*dx
-//         end if
-//         D = D + 2*dy
+	y = 0;
+	while (y < data->height)
+	{
+		x = 0;
+		while (x < data->width)
+		{
+
+			if (x < data->width - 1)
+				plot_line(x, y, x + 1, y, data);
+			if (y < data->height -1)
+				plot_line(x, y, x, y + 1, data);
+			x++;
+		}
+		y++;
+	}
+}
+
+void	isomeric(float *x, float *y, int z)
+{
+	*x = (*x - *y) * cos(0.8);
+	*y = (*x + *y) * sin(0.8) - z;
+}

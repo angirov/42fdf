@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 19:05:05 by vangirov          #+#    #+#             */
-/*   Updated: 2022/05/07 18:46:03 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/05/08 11:29:48 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ typedef	struct s_fdf
 	int	width;
 	int	height;
 	int	**z_matrix;
-
+	int	zoom;
+	int	color;
+	int	shift_x;
+	int	shift_y;
 	void	*mlx_ptr;
 	void	*win_ptr;
 }	t_fdf;
@@ -34,6 +37,8 @@ typedef	struct s_fdf
 
 void	read_map(const char *map_file_name, t_fdf *data);
 int		get_width(const char *file_name);
-void	plot_line(int x0, int x1, int y0, int y1, t_fdf *data);
+void	plot_line(float x, float y, float x1, float y1, t_fdf *data);
+void	plot_map(t_fdf *data);
+void	isomeric(float *x, float *y, int z);
 
 #endif
