@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 14:20:11 by vangirov          #+#    #+#             */
-/*   Updated: 2022/05/25 14:54:36 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/05/25 22:03:24 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,21 @@ int	get_width(const char *map_file_name)
 	return (width);
 }
 
-void	ft_set_point(t_point *p, int x, int y, int z)
+int		ft_set_color(int z)
+{
+	if (z > 0)
+		return (RED);
+	else
+		return (WHITE);
+}
+
+
+void	ft_init_point(t_point *p, int x, int y, int z)
 {
 	p->x = x;
 	p->y = y;
 	p->z = z;
+	p->color = ft_set_color(z);
 }
 
 void	fill_matrix(const char *map_file_name, t_fdf *data, int height, int width)
@@ -66,7 +76,7 @@ void	fill_matrix(const char *map_file_name, t_fdf *data, int height, int width)
 		i = 0;
 		while (i < width)
 		{
-			ft_set_point(&data->matrix[j][i], i, j, ft_atoi(array[i]));
+			ft_init_point(&data->matrix[j][i], i, j, ft_atoi(array[i]));
 			free(array[i]);
 			i++;
 		}

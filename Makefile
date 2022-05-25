@@ -1,7 +1,11 @@
 NAME = fdf
 
 SRCS_DIR = srcs/
-SRCS_FILES = main.c read_map.c plotting.c
+SRCS_FILES =	main.c \
+				read_map.c \
+				plotting.c \
+				key_hooks.c \
+				exits.c
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 
 OBJ = ${SRCS:.c=.o}
