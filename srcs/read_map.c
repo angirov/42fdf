@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 14:20:11 by vangirov          #+#    #+#             */
-/*   Updated: 2022/05/07 14:24:08 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/05/25 13:36:04 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,26 @@ int	get_height(const char *map_file_name)
 	return height;
 }
 
-int	ft_toknum(const char *str, char c)
-{
-	int	num;
-	int	intoken;
+// int	ft_toknum(const char *str, char c)
+// {
+// 	int	num;
+// 	int	intoken;
 
-	num = 0;
-	intoken = 0;
-	while (*str)
-	{
-		if (*str != c && intoken == 0)
-		{
-			num++;
-			intoken = 1;
-		}
-		else if (*str == c && intoken == 1)
-			intoken = 0;
-		str++;
-	}
-	return (num);
-}
+// 	num = 0;
+// 	intoken = 0;
+// 	while (*str)
+// 	{
+// 		if (*str != c && intoken == 0)
+// 		{
+// 			num++;
+// 			intoken = 1;
+// 		}
+// 		else if (*str == c && intoken == 1)
+// 			intoken = 0;
+// 		str++;
+// 	}
+// 	return (num);
+// }
 
 int	get_width(const char *map_file_name)
 {

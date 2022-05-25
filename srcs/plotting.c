@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 10:04:57 by vangirov          #+#    #+#             */
-/*   Updated: 2022/05/08 11:41:26 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/05/18 13:28:18 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,24 @@ void	plot_line(float x, float y, float x1, float y1, t_fdf *data)
 	z = data->z_matrix[(int)y][(int)x];
 	z1 = data->z_matrix[(int)y1][(int)x1];
 
+	isometric(&x, &y, z, data);
+	isometric(&x1, &y1, z1, data);
+	
+
+	
 	x *= data->zoom;
 	x1 *= data->zoom;
 	y *= data->zoom;
 	y1 *= data->zoom;
-
-	data->color = (z || z1) ? RED : WHITE;
-	// data->color = WHITE;
-
-	isomeric(&x, &y, z);
-	isomeric(&x1, &y1, z1);
 	
 	x += data->shift_x;
 	y += data->shift_y;
 	x1 += data->shift_x;
 	y1 += data->shift_y;
+	data->color = (z || z1) ? RED : WHITE;
+	// data->color = WHITE;
 	
+
 	dx = x1 - x;
 	dy = y1 - y;
 	max = MAX(ABS(dx), ABS(dy));
@@ -80,8 +82,14 @@ void	plot_map(t_fdf *data)
 	}
 }
 
-void	isomeric(float *x, float *y, int z)
+// void	isometric(float *x, float *y, int z, t_fdf *data)
+// {
+// 	*x = (*x - *y) * cos(data->angle);
+// 	*y = (*x + *y) * sin(data->angle) - z;
+// }
+
+void	isometric(float *x, float *y, int z, t_fdf *data)
 {
-	*x = (*x - *y) * cos(0.8);
-	*y = (*x + *y) * sin(0.8) - z;
+	*x = *x * cos(data->angle) - *y * sin(data->angle);
+	*y = *x * sin(data->angle) + *y * cos(data->angle) - z;
 }
