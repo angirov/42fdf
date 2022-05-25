@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 10:04:57 by vangirov          #+#    #+#             */
-/*   Updated: 2022/05/18 13:28:18 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/05/25 14:47:36 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	plot_line(float x, float y, float x1, float y1, t_fdf *data)
 	int	z;
 	int	z1;
 
-	z = data->z_matrix[(int)y][(int)x];
-	z1 = data->z_matrix[(int)y1][(int)x1];
+	z = data->matrix[(int)y][(int)x].z;
+	z1 = data->matrix[(int)y1][(int)x1].z;
 
 	isometric(&x, &y, z, data);
 	isometric(&x1, &y1, z1, data);

@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 14:20:19 by vangirov          #+#    #+#             */
-/*   Updated: 2022/05/25 13:48:54 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/05/25 14:46:50 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////
 #include <stdio.h> /////////////////////////////////////////////////
-void	print_z_matrix(t_fdf *data) //////////////////////////////////
+void	print_matrix(t_fdf *data) //////////////////////////////////
 {
 	printf("start printing matrix\n");
 	int	j = 0;
@@ -35,7 +35,7 @@ void	print_z_matrix(t_fdf *data) //////////////////////////////////
 	while (j < data->height)
 	{
 		while (i < data->width)
-			printf("%3d", data->z_matrix[j][i++]);
+			printf("%3d", data->matrix[j][i++].z);
 		i = 0;
 		j++;
 		printf("\n");
@@ -57,8 +57,8 @@ void ft_escape(t_fdf *data)
 {
 	int i = 0; 
 	while (i < data->height)
-		free(data->z_matrix[i++]);
-	free(data->z_matrix);
+		free(data->matrix[i++]);
+	free(data->matrix);
 	free(data);
 	exit(1);
 }
@@ -105,7 +105,7 @@ int	main(int argc, char **argv) //int argc, char **argv
 	data->zoom = 20;
 	data->angle = 0;
 	// /////  TEST  /////
-	print_z_matrix(data); /////////////////////////////////////////////////
+	print_matrix(data); /////////////////////////////////////////////////
 
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, 1000, 1000, "FDF");
@@ -124,8 +124,8 @@ int	main(int argc, char **argv) //int argc, char **argv
 	// /// Free data ///
 	// int i = 0; 
 	// while (i < data->height)
-	// 	free(data->z_matrix[i++]);
-	// free(data->z_matrix);
+	// 	free(data->matrix[i++]);
+	// free(data->matrix);
 	// free(data);
 	return (argc);
 }
