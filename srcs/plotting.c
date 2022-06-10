@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 10:04:57 by vangirov          #+#    #+#             */
-/*   Updated: 2022/06/10 15:04:35 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/06/10 16:58:37 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,15 @@ t_point	ft_set_point(t_point p, t_fdf *data)
 {
 	ft_scale_point(&p, data);
 	
+	p.x = p.x - data->pivot_x;
+	p.y = p.y - data->pivot_y;
+
 	x_rotate(&p.y, &p.z, data->alpha);
 	y_rotate(&p.x, &p.z, data->beta);
 	z_rotate(&p.x, &p.y, data->gamma);
+
+	p.x = p.x + data->pivot_x;
+	p.y = p.y + data->pivot_y;
 
 	ft_shift_point(&p, data);
 	return (p);

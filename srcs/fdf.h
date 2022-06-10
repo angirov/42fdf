@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 19:05:05 by vangirov          #+#    #+#             */
-/*   Updated: 2022/06/10 15:37:26 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/06/10 17:22:30 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 # include "ft_printf.h"
 
 // window
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 1600
+# define HEIGHT 800
 # define TITLE "Fdf"
 
 // colors
@@ -42,10 +42,10 @@
 
 // keys
 # define KEY_ESC 65307
-# define KEY_L 65361
-# define KEY_U 65362
-# define KEY_R 65363
-# define KEY_D 65364
+# define KEY_LEFT 65361
+# define KEY_UP 65362
+# define KEY_RIGHT 65363
+# define KEY_DOWN 65364
 # define KEY_Q 113
 # define KEY_W 119
 # define KEY_A 97
@@ -76,6 +76,8 @@ typedef struct s_fdf
 	int		zoom;
 	int		color;
 	float	angle;
+	int		pivot_x;
+	int		pivot_y;
 	int		offset_x;
 	int		offset_y;
 	int		shift_x;

@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:57:53 by vangirov          #+#    #+#             */
-/*   Updated: 2022/06/10 15:37:03 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/06/10 17:49:12 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,10 @@ void	ft_proj_parallel(t_fdf *data)
 
 void	ft_proj_isometric(t_fdf *data)
 {
-	data->alpha = gtr(-45);
-	data->beta = gtr(35.264);
-	data->gamma = gtr(0);
+	data->alpha = gtr(-15);
+	data->beta = gtr(15);
+	data->gamma = gtr(-45);
 }
-
 int	deal_key(int key, t_fdf *data)
 {
 	ft_printf("%d\n", key);
@@ -39,14 +38,14 @@ int	deal_key(int key, t_fdf *data)
 	// 	print_matrix(data);////////////////////////////////////////////////////////
 	if (key == KEY_ESC)
 		ft_escape(data);
-	if (key == KEY_L)
-		data->shift_x -= SHIFT_VAL;
-	if (key == KEY_U)
-		data->shift_y -= SHIFT_VAL;
-	if (key == KEY_R)
-		data->shift_x += SHIFT_VAL;
-	if (key == KEY_D)
-		data->shift_y += SHIFT_VAL;
+	if (key == KEY_LEFT)
+		data->shift_x -= data->zoom;
+	if (key == KEY_UP)
+		data->shift_y -= data->zoom;
+	if (key == KEY_RIGHT)
+		data->shift_x += data->zoom;
+	if (key == KEY_DOWN)
+		data->shift_y += data->zoom;
 		
 	if (key == KEY_Q)
 		data->alpha += ANGLE_VAL;

@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 13:03:50 by vangirov          #+#    #+#             */
-/*   Updated: 2022/06/10 14:52:36 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/06/10 17:09:20 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,15 @@ t_fdf	*ft_make_data(char *map_file_name)
 		ft_error(data, "data malloc failed");
 	ft_init_mlx(data);
 	read_map(map_file_name, data);
-	data->zoom = 20; /////////////////////////////////////////////////
-	data->angle = 0; /////////////////////////////////////////////////
+	data->zoom = WIDTH / 3 / data->width;
+	data->angle = 0;
+	data->pivot_x = data->width * data->zoom / 2;
+	data->pivot_y = data->height * data->zoom / 2;
 	data->shift_x = 0;
-	data->offset_y = 100;
-	data->offset_x = 100;
+	data->shift_y = 0;
+	data->offset_x = WIDTH / 2 - data->pivot_x;
+	data->offset_y = HEIGHT / 2 - data->pivot_y;
+
 	data->alpha = 0;
 	data->beta = 0;
 	data->gamma = 0;
