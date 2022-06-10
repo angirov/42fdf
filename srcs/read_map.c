@@ -6,19 +6,38 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 14:20:11 by vangirov          #+#    #+#             */
-/*   Updated: 2022/05/25 22:03:24 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/06/10 14:50:42 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+void	read_map(const char *map_file_name, t_fdf *data)
+{
+	int	j;
+
+	data->height = get_height(map_file_name);
+	data->width = get_width(map_file_name);
+	data->matrix = (t_point **)malloc(data->height * sizeof(t_point *));
+
+	j = 0;
+	while (j < data->height)
+		(data->matrix)[j++] = (t_point *)malloc(data->width * sizeof(t_point));
+	fill_matrix(map_file_name, data, data->height, data->width);
+}
+
 int	get_height(const char *map_file_name)
 {
+	int		fd;
 	char	*line;
-	size_t	fd;
 	int		height;
 
-	fd = open(map_file_name, O_RDONLY); // protection???
+	fd = open(map_file_name, O_RDONLY);
+	if (fd < 0)
+		{
+			ft_fdprintf(2, "Error: %s: %s\n", strerror(errno), map_file_name);
+			exit(1);
+		}
 	height = 0;
 	while (get_next_line(fd, &line))
 	{
@@ -31,12 +50,16 @@ int	get_height(const char *map_file_name)
 
 int	get_width(const char *map_file_name)
 {
-	size_t	fd;
+	int		fd;
 	char	*line;
 	int		width;
 
-	fd = open(map_file_name, O_RDONLY); // protection???
-	get_next_line(fd, &line); // protection???
+	fd = open(map_file_name, O_RDONLY);
+	if (fd < 0)
+		{
+			ft_fdprintf(2, "Error: %s: %s\n", strerror(errno), map_file_name);
+			exit(1);
+		}	get_next_line(fd, &line); // protection???
 	width = ft_toknum(line, ' ');
 	free(line);
 	close(fd);
@@ -50,7 +73,6 @@ int		ft_set_color(int z)
 	else
 		return (WHITE);
 }
-
 
 void	ft_init_point(t_point *p, int x, int y, int z)
 {
@@ -85,18 +107,4 @@ void	fill_matrix(const char *map_file_name, t_fdf *data, int height, int width)
 		j++;
 	}
 	close(fd);
-}
-
-void	read_map(const char *map_file_name, t_fdf *data)
-{
-	int	j;
-
-	data->height = get_height(map_file_name);
-	data->width = get_width(map_file_name);
-	data->matrix = (t_point **)malloc(data->height * sizeof(t_point *));
-
-	j = 0;
-	while (j < data->height)
-		(data->matrix)[j++] = (t_point *)malloc(data->width * sizeof(t_point));
-	fill_matrix(map_file_name, data, data->height, data->width);
 }

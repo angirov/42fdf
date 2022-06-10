@@ -2,8 +2,10 @@ NAME = fdf
 
 SRCS_DIR = srcs/
 SRCS_FILES =	main.c \
+				make_data.c \
 				read_map.c \
 				plotting.c \
+				rotation.c \
 				key_hooks.c \
 				exits.c
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_FILES))

@@ -6,15 +6,21 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 19:05:05 by vangirov          #+#    #+#             */
-/*   Updated: 2022/05/25 22:07:28 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/06/10 15:37:26 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
+/* for strerror */
+# include <string.h>
+# include <errno.h>
+
+/* for perror */
+# include <stdio.h> 
+
 # include <stdlib.h>
-# include <stdio.h> // perror()
 # include <stddef.h>
 # include <fcntl.h>
 
@@ -46,6 +52,11 @@
 # define KEY_S 115
 # define KEY_Z 122
 # define KEY_X 120
+# define KEY_1 49
+# define KEY_2 50
+# define KEY_P 112
+# define KEY_I 105
+
 # define SHIFT_VAL 100
 # define ANGLE_VAL M_PI/36
 
@@ -77,6 +88,16 @@ typedef struct s_fdf
 	void	*img_prt;
 }	t_fdf;
 
+#define ABS(a) ((a < 0) ? -a : a)
+#define MAX(a, b) ((a > b) ? a : b)
+#define WHITE 0xffffff
+#define RED 0xe80c0c
+
+// make_fdf
+void	ft_check_input(int argc, char **argv);
+void	ft_init_mlx(t_fdf *data);
+t_fdf	*ft_make_data(char *map_file_name);
+
 // read_map.c
 int		get_height(const char *map_file_name);
 int		get_width(const char *map_file_name);
@@ -89,15 +110,27 @@ int	deal_key(int key, t_fdf *data);
 
 
 // ploting.c
-// void	ft_set_line(t_point p0, t_point p1, t_fdf *data);
-// void	ft_plot_line(float x, float y, float x1, float y1, int color, t_fdf *data);
-// void	plot_map(t_fdf *data);
-// void	isometric(int *x, int *y, int z, t_fdf *data);
-void	read_map(const char *map_file_name, t_fdf *data);
-int		get_width(const char *file_name);
-void	plot_line(t_point p0, t_point p1, t_fdf *data);
 void	plot_map(t_fdf *data);
-void	isometric(float *x, float *y, float z, t_fdf *data);
+t_point	ft_set_point(t_point p, t_fdf *data);
+void	plot_line(t_point p0, t_point p1, t_fdf *data);
+int		ft_line_color(t_point p0, t_point p1);
+
+// read_map.c
+void	read_map(const char *map_file_name, t_fdf *data);
+int		get_height(const char *map_file_name);
+int		get_width(const char *file_name);
+int		ft_set_color(int z);
+void	ft_init_point(t_point *p, int x, int y, int z);
+void	fill_matrix(const char *map_file_name, t_fdf *data, int height, int width);
+
+// void	isometric(float *x, float *y, float z, t_fdf *data);
+
+/* rotation.c */
+void	x_rotate(int *y, int *z, float alpha);
+void	y_rotate(int *x, int *z, float beta);
+void	z_rotate(int *x, int *y, float gamma);
+void	ft_scale_point(t_point *p, t_fdf *data);
+void	ft_shift_point(t_point *p, t_fdf *data);
 
 // exit.c
 void	ft_error(t_fdf *data, char *message);
