@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 10:04:57 by vangirov          #+#    #+#             */
-/*   Updated: 2022/06/10 16:58:37 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/06/10 19:08:41 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	plot_map(t_fdf *data)
 		}
 		y++;
 	}
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+		data->img_prt, 0, 0);
 }
 
 t_point	ft_set_point(t_point p, t_fdf *data)
@@ -75,7 +77,8 @@ void	plot_line(t_point p0, t_point p1, t_fdf *data)
 
 	while ((int)(x0 - x1) || (int)(y0 - y1))
 	{
-		mlx_pixel_put(data->mlx_ptr, data->win_ptr, x0, y0, ft_line_color(p0, p1));
+		// mlx_pixel_put(data->mlx_ptr, data->win_ptr, x0, y0, ft_line_color(p0, p1));
+		ft_put_pixel(data, x0, y0, ft_line_color(p0, p1));
 		x0 += dx;
 		y0 += dy;
 	}
@@ -88,4 +91,17 @@ int	ft_line_color(t_point p0, t_point p1)
 	// else
 	// 	return (WHITE);
 	return ((p0.color + p1.color) / 2);
+}
+
+
+void	ft_put_pixel(t_fdf *data, int x, int y, int color)
+{
+	char	*dst;
+
+	if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
+	{
+		dst = data->addr
+			+ (y * data->line_length + x * (data->bits_per_pixel / 8));
+		*(unsigned int *) dst = color;
+	}
 }

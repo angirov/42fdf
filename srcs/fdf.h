@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 19:05:05 by vangirov          #+#    #+#             */
-/*   Updated: 2022/06/10 17:22:30 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/06/10 19:08:27 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,10 @@ typedef struct s_fdf
 	void	*mlx_ptr;
 	void	*win_ptr;
 	void	*img_prt;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
 }	t_fdf;
 
 #define ABS(a) ((a < 0) ? -a : a)
@@ -109,13 +113,15 @@ void	read_map(const char *map_file_name, t_fdf *data);
 
 // key_hooks.c
 int	deal_key(int key, t_fdf *data);
-
+void	ft_proj_isometric(t_fdf *data);
+void	ft_proj_parallel(t_fdf *data);
 
 // ploting.c
 void	plot_map(t_fdf *data);
 t_point	ft_set_point(t_point p, t_fdf *data);
 void	plot_line(t_point p0, t_point p1, t_fdf *data);
 int		ft_line_color(t_point p0, t_point p1);
+void	ft_put_pixel(t_fdf *data, int x, int y, int color);
 
 // read_map.c
 void	read_map(const char *map_file_name, t_fdf *data);
@@ -125,19 +131,19 @@ int		ft_set_color(int z);
 void	ft_init_point(t_point *p, int x, int y, int z);
 void	fill_matrix(const char *map_file_name, t_fdf *data, int height, int width);
 
-// void	isometric(float *x, float *y, float z, t_fdf *data);
-
 /* rotation.c */
 void	x_rotate(int *y, int *z, float alpha);
 void	y_rotate(int *x, int *z, float beta);
 void	z_rotate(int *x, int *y, float gamma);
 void	ft_scale_point(t_point *p, t_fdf *data);
 void	ft_shift_point(t_point *p, t_fdf *data);
+void	ft_isometric(int *x, int *y, int *z);
 
 // exit.c
 void	ft_error(t_fdf *data, char *message);
 void	ft_escape(t_fdf *data);
 void	ft_free_data(t_fdf *data);
+int		ft_destroy(t_fdf *data);
 
 void	print_matrix(t_fdf *data); //////////////////////////////////
 

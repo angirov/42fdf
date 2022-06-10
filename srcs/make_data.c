@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 13:03:50 by vangirov          #+#    #+#             */
-/*   Updated: 2022/06/10 17:09:20 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/06/10 19:07:59 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ void	ft_init_mlx(t_fdf *data)
 	data->img_prt = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	if (!data->img_prt)
 		ft_error(data, "mlx_new_image failed");
+	data->addr = mlx_get_data_addr(data->img_prt,
+			&data->bits_per_pixel, &data->line_length,
+			&data->endian);
 }
 
 t_fdf	*ft_make_data(char *map_file_name)
@@ -53,9 +56,6 @@ t_fdf	*ft_make_data(char *map_file_name)
 	data->shift_y = 0;
 	data->offset_x = WIDTH / 2 - data->pivot_x;
 	data->offset_y = HEIGHT / 2 - data->pivot_y;
-
-	data->alpha = 0;
-	data->beta = 0;
-	data->gamma = 0;
+	ft_proj_isometric(data);
 	return data;
 }

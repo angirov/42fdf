@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:57:53 by vangirov          #+#    #+#             */
-/*   Updated: 2022/06/10 17:49:12 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/06/10 19:05:29 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,25 @@ void	ft_proj_isometric(t_fdf *data)
 	data->beta = gtr(15);
 	data->gamma = gtr(-45);
 }
+
+void	ft_clear_image(t_fdf *data)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			ft_put_pixel(data, x, y, 0x00000000);
+			x++;
+		}
+		y++;
+	}
+}
+
 int	deal_key(int key, t_fdf *data)
 {
 	ft_printf("%d\n", key);
@@ -70,7 +89,9 @@ int	deal_key(int key, t_fdf *data)
 	if (key == KEY_I)
 		ft_proj_isometric(data);
 	
-	mlx_clear_window(data->mlx_ptr, data->win_ptr);
+	// mlx_clear_window(data->mlx_ptr, data->win_ptr);
+	ft_clear_image(data);
+
 	plot_map(data);
 	return(0);
 }
