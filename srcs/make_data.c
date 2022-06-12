@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 13:03:50 by vangirov          #+#    #+#             */
-/*   Updated: 2022/06/12 21:21:07 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/06/12 22:46:25 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,25 +39,43 @@ void	ft_init_mlx(t_fdf *data)
 			&data->endian);
 }
 
-t_fdf	*ft_make_data(char *map_file_name)
+int	get_width(const char *map_file_name)
 {
-	t_fdf	*data;
+	int		fd;
+	char	*line;
+	int		width;
 
-	data = (t_fdf *)malloc(sizeof(t_fdf));
-	if (!data)
-		ft_error(data, "data malloc failed");
-	ft_init_mlx(data);
-	read_map(map_file_name, data);
-	ft_reset_angles(data);
-	data->proj = 1;
-	data->zoom = WIDTH / 3 / data->width;
-	data->z_scale = 1;
-	data->angle = 0;
-	data->pivot_x = data->width * data->zoom / 2;
-	data->pivot_y = data->height * data->zoom / 2;
-	data->shift_x = 0;
-	data->shift_y = 0;
-	data->offset_x = WIDTH / 2 - data->pivot_x;
-	data->offset_y = HEIGHT / 2 - data->pivot_y;
-	return data;
+	fd = open(map_file_name, O_RDONLY);
+	if (fd < 0)
+	{
+		ft_fdprintf(2, "Error: %s: %s\n", strerror(errno), map_file_name);
+		exit(1);
+	}
+	get_next_line(fd, &line);
+	width = ft_toknum(line, ' ');
+	free(line);
+	close(fd);
+	return (width);
+}
+
+int	get_height(const char *map_file_name)
+{
+	int		fd;
+	char	*line;
+	int		height;
+
+	fd = open(map_file_name, O_RDONLY);
+	if (fd < 0)
+	{
+		ft_fdprintf(2, "Error: %s: %s\n", strerror(errno), map_file_name);
+		exit(1);
+	}
+	height = 0;
+	while (get_next_line(fd, &line))
+	{
+		height++;
+		free(line);
+	}
+	close(fd);
+	return (height);
 }

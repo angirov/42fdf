@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: vangirov <vangirov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 19:05:05 by vangirov          #+#    #+#             */
-/*   Updated: 2022/06/12 21:44:33 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/06/12 23:04:48 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define _USE_MATH_DEFINES
 # include <math.h>
 # define SHIFT_VAL 100
-# define ANGLE_VAL M_PI/36
+# define ANGLE_DIV 36
 
 // window
 # define WIDTH 1600
@@ -95,6 +95,14 @@ typedef struct s_point
 	int	color;
 }	t_point;
 
+typedef struct s_fpoint
+{
+	float	x;
+	float	y;
+	float	z;
+	int		color;
+}	t_fpoint;
+
 typedef struct s_fdf
 {
 	int		width;
@@ -123,10 +131,8 @@ typedef struct s_fdf
 	int		endian;
 }	t_fdf;
 
-#define ABS(a) ((a < 0) ? -a : a)
-#define MAX(a, b) ((a > b) ? a : b)
-#define WHITE 0xffffff
-#define RED 0xe80c0c
+# define WHITE 0xffffff
+# define RED 0xe80c0c
 
 // make_data
 void	ft_check_input(int argc, char **argv);
@@ -137,7 +143,8 @@ t_fdf	*ft_make_data(char *map_file_name);
 int		get_height(const char *map_file_name);
 int		get_width(const char *map_file_name);
 void	ft_init_point(t_point *p, int x, int y, int z);
-void	fill_matrix(const char *map_file_name, t_fdf *data, int height, int width);
+void	fill_matrix(const char *map_file_name, \
+					t_fdf *data, int height, int width);
 void	read_map(const char *map_file_name, t_fdf *data);
 
 // key_hooks.c
@@ -149,7 +156,7 @@ void	ft_proj_parallel(t_fdf *data);
 void	ft_plot_map(t_fdf *data);
 t_point	ft_set_point(t_point p, t_fdf *data);
 void	ft_plot_line(t_point p0, t_point p1, t_fdf *data);
-int		ft_line_color(t_point p0, t_point p1);
+int		ft_line_color(t_fpoint p0, t_fpoint p1);
 void	ft_put_pixel(t_fdf *data, int x, int y, int color);
 
 // read_map.c
@@ -158,7 +165,8 @@ int		get_height(const char *map_file_name);
 int		get_width(const char *file_name);
 int		ft_set_color(int z);
 void	ft_init_point(t_point *p, int x, int y, int z);
-void	fill_matrix(const char *map_file_name, t_fdf *data, int height, int width);
+void	fill_matrix(const char *map_file_name, \
+					t_fdf *data, int height, int width);
 
 /* rotation.c */
 void	x_rotate(int *y, int *z, float alpha);
@@ -171,6 +179,8 @@ void	ft_shift_point(t_point *p, t_fdf *data);
 void	ft_reset_angles(t_fdf *data);
 void	ft_isometric(int *x, int *y, int *z);
 void	ft_cabinet(int *x, int *y, int *z);
+float	ft_abs(float a);
+float	ft_max(float a, float b);
 
 // exit.c
 void	ft_error(t_fdf *data, char *message);

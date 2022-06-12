@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exits_linux.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: vangirov <vangirov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 16:00:36 by vangirov          #+#    #+#             */
-/*   Updated: 2022/06/12 14:49:56 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/06/12 23:05:58 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_escape(t_fdf *data)
 
 void	ft_free_data(t_fdf *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data->height)
