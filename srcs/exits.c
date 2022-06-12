@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exits.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: vangirov <vangirov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 16:00:36 by vangirov          #+#    #+#             */
-/*   Updated: 2022/06/10 18:39:44 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/06/12 14:17:24 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_destroy(t_fdf *data)
 {
 	mlx_destroy_image(data->mlx_ptr, data->img_prt);
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	mlx_destroy_display(data->mlx_ptr);
+	// mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
 	ft_free_data(data);
 	exit(1);

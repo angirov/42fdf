@@ -1,6 +1,6 @@
 NAME = fdf
 
-SRCS_DIR = srcs/
+SRCS_DIR = ../srcs/
 SRCS_FILES =	main.c \
 				make_data.c \
 				read_map.c \
@@ -15,14 +15,11 @@ OBJ = ${SRCS:.c=.o}
 HEADERS = $(SRCS_DIR)fdf.h
 
 # ========== libraries ==========
-LIB_DIR = libs
-
-MLX_DIR = $(LIB_DIR)/minilibx_macos
-# MLX_DIR = $(LIB_DIR)/minilibx_mms_20191025_beta
-MLX_LIB	=	mlx
+LIB_DIR = ../libs
 
 LIBFT_DIR = $(LIB_DIR)/libft
 LIBFT_A = $(LIBFT_DIR)/libft.a
+
 
 LIBFT_PRINTF_DIR = $(LIB_DIR)/libft_printf
 LIBFT_PRINTF_A = $(LIBFT_PRINTF_DIR)/libftprintf.a
@@ -37,24 +34,13 @@ INCLUDES_LOCAL = -I$(SRCS_DIR) -I$(LIBFT_DIR) -I$(LIBFT_PRINTF_DIR)
 # ========== rules ==========
 all: $(NAME)
 
-# $(NAME): $(OBJ)
-# 	$(CC) $(OBJ) $(INCLUDES_LOCAL) $(ALL_LIBS) $(HEADERS) $(MLX_FLAFS) -o $(NAME)
-
-# %.o: %.c $(HEADERS) makelibs
-# 	$(CC) $(CFLAGS) $(INCLUDES_LOCAL) -I/usr/include -Imlx_linux -c $< -o $@ 
-
-$(NAME): makelibs $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ)	-L$(LIBFT_PRINTF_DIR)	-lftprintf \
-							-L$(LIBFT_DIR)			-lft \
-							-L$(MLX_DIR) 			-l$(MLX_LIB) \
-							-L/usr/lib -lm -lz -framework OpenGL -framework AppKit \
-							-o $(NAME)
+$(NAME): $(OBJ)
+	$(CC) $(OBJ) $(INCLUDES_LOCAL) $(ALL_LIBS) $(HEADERS) $(MLX_FLAFS) -o $(NAME)
 
 %.o: %.c $(HEADERS) makelibs
-	$(CC) $(CFLAGS) -O3 -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDES_LOCAL) -I/usr/include -Imlx_linux -c $< -o $@ 
 
 makelibs:
-	make -C $(MLX_DIR)
 	make bonus -C $(LIBFT_DIR)
 	make -C $(LIBFT_PRINTF_DIR)
 
