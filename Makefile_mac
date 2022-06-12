@@ -17,8 +17,8 @@ HEADERS = $(SRCS_DIR)fdf.h
 # ========== libraries ==========
 LIB_DIR = libs
 
-# MLX_DIR = $(LIB_DIR)/minilibx_macos
-MLX_DIR = $(LIB_DIR)/minilibx_mms_20191025_beta
+MLX_DIR = $(LIB_DIR)/minilibx_macos
+# MLX_DIR = $(LIB_DIR)/minilibx_mms_20191025_beta
 MLX_LIB	=	mlx
 
 LIBFT_DIR = $(LIB_DIR)/libft
@@ -50,7 +50,7 @@ $(NAME): makelibs $(OBJ)
 							-L/usr/lib -lm -lz -framework OpenGL -framework AppKit \
 							-o $(NAME)
 
-%.o: %.c
+%.o: %.c $(HEADERS) makelibs
 	$(CC) $(CFLAGS) -O3 -c $< -o $@
 
 makelibs:
