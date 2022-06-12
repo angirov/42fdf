@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 14:20:19 by vangirov          #+#    #+#             */
-/*   Updated: 2022/06/12 20:33:27 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/06/12 21:46:00 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,25 @@ int	main(int argc, char **argv)
 	return (argc);
 }
 
-///////////////////////////////////////////////////////////////////////////////////
-void	print_matrix(t_fdf *data) //////////////////////////////////
-{
-	printf("start printing matrix\n");
-	int	j = 0;
-	int	i = 0;
+// // https://en.wikipedia.org/wiki/3D_projection
+// void	print_matrix(t_fdf *data) //////////////////////////////////
+// {
+// 	printf("start printing matrix\n");
+// 	int	j = 0;
+// 	int	i = 0;
 
-	while (j < data->height)
-	{
-		while (i < data->width)
-		{
-			printf("%2d/", data->matrix[j][i].x);
-			printf("%2d/", data->matrix[j][i].y);
-			printf("%2d ", data->matrix[j][i].z);
-			i++;
-		}
-		i = 0;
-		j++;
-		printf("\n");
-	}
-	printf("finish printing matrix\n");
-}
-///////////////////////////////////////////////////////////////////////////////////
+// 	while (j < data->height)
+// 	{
+// 		while (i < data->width)
+// 		{
+// 			printf("%2d/", data->matrix[j][i].x);
+// 			printf("%2d/", data->matrix[j][i].y);
+// 			printf("%2d ", data->matrix[j][i].z);
+// 			i++;
+// 		}
+// 		i = 0;
+// 		j++;
+// 		printf("\n");
+// 	}
+// 	printf("finish printing matrix\n");
+// }

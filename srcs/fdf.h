@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vangirov <vangirov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 19:05:05 by vangirov          #+#    #+#             */
-/*   Updated: 2022/06/12 21:29:13 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/06/12 21:44:33 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@
 #  define KEY_X 120
 #  define KEY_1 49
 #  define KEY_2 50
+#  define KEY_3 51
+#  define KEY_4 52
 #  define KEY_P 112
 #  define KEY_I 105
 #  define KEY_C 99
