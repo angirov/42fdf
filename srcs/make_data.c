@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: vangirov <vangirov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 13:03:50 by vangirov          #+#    #+#             */
-/*   Updated: 2022/06/12 19:50:45 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/06/12 21:21:07 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,10 @@ t_fdf	*ft_make_data(char *map_file_name)
 		ft_error(data, "data malloc failed");
 	ft_init_mlx(data);
 	read_map(map_file_name, data);
-	data->proj = 0;
+	ft_reset_angles(data);
+	data->proj = 1;
 	data->zoom = WIDTH / 3 / data->width;
+	data->z_scale = 1;
 	data->angle = 0;
 	data->pivot_x = data->width * data->zoom / 2;
 	data->pivot_y = data->height * data->zoom / 2;

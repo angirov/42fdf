@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: vangirov <vangirov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:57:53 by vangirov          #+#    #+#             */
-/*   Updated: 2022/06/12 20:33:27 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/06/12 21:24:58 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,10 @@ int	deal_key(int key, t_fdf *data)
 		data->zoom -= 1;
 	if (key == KEY_2)
 		data->zoom += 1;
+	if (key == KEY_3 && data->z_scale > 1)
+		data->z_scale -= 1;
+	if (key == KEY_4)
+		data->z_scale += 1;
 
 	if (key == KEY_P)
 		ft_reset_angles(data);

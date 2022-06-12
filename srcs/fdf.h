@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: vangirov <vangirov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 19:05:05 by vangirov          #+#    #+#             */
-/*   Updated: 2022/06/12 20:33:27 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/06/12 21:29:13 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@
 
 # elif defined(__APPLE__)
 #  include "../libs/minilibx_macos/mlx.h"
-// #  include "../libs/minilibx_mms_20191025_beta/mlx.h"
 #  include "../libs/libft/libft.h"
 #  include "../libs/libft_printf/ft_printf.h"
 
@@ -78,9 +77,11 @@
 #  define KEY_X 7
 #  define KEY_1 18
 #  define KEY_2 19
+#  define KEY_3 20
+#  define KEY_4 21
 #  define KEY_P 35
 #  define KEY_I 34
-#  define KEY_C 99 //////////////////////////////////////////////////////////////////
+#  define KEY_C 8
 
 # endif
 
@@ -98,6 +99,7 @@ typedef struct s_fdf
 	int		height;
 	t_point	**matrix;
 	int		zoom;
+	int		z_scale;
 	int		proj;
 	int		color;
 	float	angle;
@@ -173,7 +175,5 @@ void	ft_error(t_fdf *data, char *message);
 void	ft_escape(t_fdf *data);
 void	ft_free_data(t_fdf *data);
 int		ft_destroy(t_fdf *data);
-
-void	print_matrix(t_fdf *data); //////////////////////////////////
 
 #endif

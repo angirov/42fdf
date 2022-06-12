@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotation.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: vangirov <vangirov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 14:22:57 by vangirov          #+#    #+#             */
-/*   Updated: 2022/06/12 20:24:36 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/06/12 21:19:42 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_scale_point(t_point *p, t_fdf *data)
 {
 	p->x *= data->zoom;
 	p->y *= data->zoom;
-	p->z *= data->zoom;
+	p->z *= data->z_scale;
 }
 
 void	ft_shift_point(t_point *p, t_fdf *data)
