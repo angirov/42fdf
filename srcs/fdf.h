@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vangirov <vangirov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 19:05:05 by vangirov          #+#    #+#             */
-/*   Updated: 2022/06/12 14:02:51 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/06/12 14:46:07 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ void	fill_matrix(const char *map_file_name, t_fdf *data, int height, int width);
 void	read_map(const char *map_file_name, t_fdf *data);
 
 // key_hooks.c
-int	deal_key(int key, t_fdf *data);
+int		deal_key(int key, t_fdf *data);
 void	ft_proj_isometric(t_fdf *data);
 void	ft_proj_parallel(t_fdf *data);
 
@@ -159,7 +159,6 @@ void	y_rotate(int *x, int *z, float beta);
 void	z_rotate(int *x, int *y, float gamma);
 void	ft_scale_point(t_point *p, t_fdf *data);
 void	ft_shift_point(t_point *p, t_fdf *data);
-void	ft_isometric(int *x, int *y, int *z);
 
 // exit.c
 void	ft_error(t_fdf *data, char *message);
