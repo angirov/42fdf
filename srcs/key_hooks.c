@@ -6,29 +6,15 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:57:53 by vangirov          #+#    #+#             */
-/*   Updated: 2022/06/10 19:05:29 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/06/12 20:33:27 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-float	gtr(float grad)
+float	rtg(float rad)
 {
-	return(grad * M_PI / 180);
-}
-
-void	ft_proj_parallel(t_fdf *data)
-{
-	data->alpha = gtr(0);
-	data->beta = gtr(0);
-	data->gamma = gtr(0);
-}
-
-void	ft_proj_isometric(t_fdf *data)
-{
-	data->alpha = gtr(-15);
-	data->beta = gtr(15);
-	data->gamma = gtr(-45);
+	return(rad * 180 / M_PI);
 }
 
 void	ft_clear_image(t_fdf *data)
@@ -79,19 +65,27 @@ int	deal_key(int key, t_fdf *data)
 	if (key == KEY_X)
 		data->gamma -= ANGLE_VAL;
 
-	if (key == KEY_1)
+	if (key == KEY_1 && data->zoom > 1)
 		data->zoom -= 1;
 	if (key == KEY_2)
 		data->zoom += 1;
 
 	if (key == KEY_P)
-		ft_proj_parallel(data);
+		ft_reset_angles(data);
 	if (key == KEY_I)
-		ft_proj_isometric(data);
+		data->proj = 1;
+	if (key == KEY_C)
+		data->proj = 2;
 	
-	// mlx_clear_window(data->mlx_ptr, data->win_ptr);
+	ft_printf("%f, %f, %f\n", \
+		(int)rtg(data->alpha), (int)rtg(data->beta), (int)rtg(data->gamma));
 	ft_clear_image(data);
 
-	plot_map(data);
+	ft_plot_map(data);
 	return(0);
 }
+
+// float	gtr(float grad)
+// {
+// 	return(grad * M_PI / 180);
+// }

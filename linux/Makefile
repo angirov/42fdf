@@ -7,6 +7,7 @@ SRCS_FILES =	main.c \
 				plotting.c \
 				rotation.c \
 				key_hooks.c \
+				projections.c \
 				exits_linux.c
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 

@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 14:22:57 by vangirov          #+#    #+#             */
-/*   Updated: 2022/06/12 14:46:01 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/06/12 20:24:36 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,3 @@ void	ft_shift_point(t_point *p, t_fdf *data)
 	p->x += data->shift_x + data->offset_x;
 	p->y += data->shift_y + data->offset_y;
 }
-
-// void	ft_isometric(int *x, int *y, int *z)
-// {
-// 	int	tmp_x;
-// 	int	tmp_y;
-
-// 	tmp_x = *x;
-// 	tmp_y = *y;
-// 	*x = (tmp_x - tmp_y) + cos(0.8);
-// 	*y = (tmp_x + tmp_y) + sin(0.8) -*z;
-// }

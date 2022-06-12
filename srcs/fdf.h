@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 19:05:05 by vangirov          #+#    #+#             */
-/*   Updated: 2022/06/12 14:46:07 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/06/12 20:33:27 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@
 #  define KEY_2 50
 #  define KEY_P 112
 #  define KEY_I 105
+#  define KEY_C 99
 
 # elif defined(__APPLE__)
 #  include "../libs/minilibx_macos/mlx.h"
@@ -79,6 +80,7 @@
 #  define KEY_2 19
 #  define KEY_P 35
 #  define KEY_I 34
+#  define KEY_C 99 //////////////////////////////////////////////////////////////////
 
 # endif
 
@@ -96,6 +98,7 @@ typedef struct s_fdf
 	int		height;
 	t_point	**matrix;
 	int		zoom;
+	int		proj;
 	int		color;
 	float	angle;
 	int		pivot_x;
@@ -121,7 +124,7 @@ typedef struct s_fdf
 #define WHITE 0xffffff
 #define RED 0xe80c0c
 
-// make_fdf
+// make_data
 void	ft_check_input(int argc, char **argv);
 void	ft_init_mlx(t_fdf *data);
 t_fdf	*ft_make_data(char *map_file_name);
@@ -139,9 +142,9 @@ void	ft_proj_isometric(t_fdf *data);
 void	ft_proj_parallel(t_fdf *data);
 
 // ploting.c
-void	plot_map(t_fdf *data);
+void	ft_plot_map(t_fdf *data);
 t_point	ft_set_point(t_point p, t_fdf *data);
-void	plot_line(t_point p0, t_point p1, t_fdf *data);
+void	ft_plot_line(t_point p0, t_point p1, t_fdf *data);
 int		ft_line_color(t_point p0, t_point p1);
 void	ft_put_pixel(t_fdf *data, int x, int y, int color);
 
@@ -159,6 +162,11 @@ void	y_rotate(int *x, int *z, float beta);
 void	z_rotate(int *x, int *y, float gamma);
 void	ft_scale_point(t_point *p, t_fdf *data);
 void	ft_shift_point(t_point *p, t_fdf *data);
+
+/* projection.c */
+void	ft_reset_angles(t_fdf *data);
+void	ft_isometric(int *x, int *y, int *z);
+void	ft_cabinet(int *x, int *y, int *z);
 
 // exit.c
 void	ft_error(t_fdf *data, char *message);

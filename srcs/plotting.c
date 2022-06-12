@@ -6,13 +6,13 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 10:04:57 by vangirov          #+#    #+#             */
-/*   Updated: 2022/06/10 19:08:41 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/06/12 20:39:15 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	plot_map(t_fdf *data)
+void	ft_plot_map(t_fdf *data)
 {
 	int	y;
 	int	x;
@@ -25,12 +25,12 @@ void	plot_map(t_fdf *data)
 		{
 			if (x < data->width - 1)
 				// printf("%3d:%3d", y, x);
-				plot_line(
+				ft_plot_line(
 					ft_set_point(data->matrix[y][x], data),
 					ft_set_point(data->matrix[y][x+1], data), data); //(x, y, x + 1, y, data);
 			if (y < data->height -1)
 				// printf("%3d:%3d", y, x);
-				plot_line(
+				ft_plot_line(
 					ft_set_point(data->matrix[y][x], data), 
 					ft_set_point(data->matrix[y+1][x], data), data); //(x, y, x, y + 1, data);
 			x++;
@@ -51,7 +51,10 @@ t_point	ft_set_point(t_point p, t_fdf *data)
 	x_rotate(&p.y, &p.z, data->alpha);
 	y_rotate(&p.x, &p.z, data->beta);
 	z_rotate(&p.x, &p.y, data->gamma);
-
+	if (data->proj == 1)
+		ft_isometric(&p.x, &p.y, &p.z);
+	if (data->proj == 2)
+		ft_cabinet(&p.x, &p.y, &p.z);
 	p.x = p.x + data->pivot_x;
 	p.y = p.y + data->pivot_y;
 
@@ -59,7 +62,7 @@ t_point	ft_set_point(t_point p, t_fdf *data)
 	return (p);
 }
 
-void	plot_line(t_point p0, t_point p1, t_fdf *data)
+void	ft_plot_line(t_point p0, t_point p1, t_fdf *data)
 {
 	float	x0 = p0.x;
 	float	x1 = p1.x;

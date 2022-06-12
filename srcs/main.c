@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 14:20:19 by vangirov          #+#    #+#             */
-/*   Updated: 2022/06/10 18:39:22 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/06/12 20:33:27 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 
 	ft_check_input(argc, argv);
 	data = ft_make_data(argv[1]);
-	plot_map(data);
+	ft_plot_map(data);
 	mlx_hook(data->win_ptr, 17, 0, ft_destroy, data);
 	mlx_key_hook(data->win_ptr, deal_key, data);
 	mlx_loop(data->mlx_ptr);
