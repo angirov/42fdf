@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 19:05:05 by vangirov          #+#    #+#             */
-/*   Updated: 2022/08/28 22:03:59 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/08/28 23:20:35 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # define RED 0xe80c0c
 
 # include "mlx_api.h"
+# include "game.h"
 
 typedef struct s_point
 {
@@ -84,7 +85,6 @@ typedef struct s_fdf
 
 // make_data
 void	ft_check_input(int argc, char **argv);
-void	api_init_graphics(t_fdf *data);
 t_fdf	*ft_make_data(char *map_file_name);
 
 // read_map.c

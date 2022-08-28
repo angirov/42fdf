@@ -63,9 +63,11 @@ typedef struct s_graphics
 	int		height;
 }	t_graphics;
 
-void	api_put_pixel(t_graphics *data, int x, int y, int color);
+t_graphics	*api_init_graphics(int widht, int height, char *title);
 
-void	api_free_graphics_linux(void *mlx_ptr, void *win_ptr, void *img_prt);
-void	api_free_graphics_macos(void *mlx_ptr, void *win_ptr, void *img_prt);
+void		api_put_pixel(t_graphics *data, int x, int y, int color);
+
+void		api_free_graphics_linux(void *mlx_ptr, void *win_ptr, void *img_prt);
+void		api_free_graphics_macos(void *mlx_ptr, void *win_ptr, void *img_prt);
 
 #endif

@@ -34,9 +34,11 @@ ALL_LIBS = $(LIBFT_PRINTF_A) $(LIBFT_A)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 MLX_FLAFS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
-MODULES = mlx_api 
-I_MODULES = -I$(addprefix $(SRCS_DIR), $(MODULES))
-INCLUDES_LOCAL = -I$(SRCS_DIR) -I$(LIBFT_DIR) -I$(LIBFT_PRINTF_DIR) $(I_MODULES)
+MODULES = 	mlx_api \
+			game
+MODULES_DIRS = $(addprefix $(SRCS_DIR), $(MODULES))
+MODULES_INCL = $(addprefix -I, $(MODULES_DIRS))
+INCLUDES_LOCAL = -I$(SRCS_DIR) -I$(LIBFT_DIR) -I$(LIBFT_PRINTF_DIR) $(MODULES_INCL)
 # ========== rules ==========
 all: $(NAME)
 
