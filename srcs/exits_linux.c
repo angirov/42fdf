@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 16:00:36 by vangirov          #+#    #+#             */
-/*   Updated: 2022/08/28 20:44:45 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/08/28 20:55:54 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,22 @@ void	ft_free_data(t_fdf *data)
 	free(data);
 }
 
-void	ft_free_mlx(void *mlx_ptr, void *win_ptr, void *img_prt)
+void	ft_free_mlx_linux(void *mlx_ptr, void *win_ptr, void *img_prt)
 {
 	mlx_destroy_image(mlx_ptr, img_prt);
 	mlx_destroy_window(mlx_ptr, win_ptr);
 	mlx_destroy_display(mlx_ptr);
 }
 
+void	ft_free_mlx_macos(void *mlx_ptr, void *win_ptr, void *img_prt)
+{
+	mlx_destroy_image(mlx_ptr, img_prt);
+	mlx_destroy_window(mlx_ptr, win_ptr);
+}
+
 int	ft_destroy(t_fdf *data)
 {
-	ft_free_mlx(data->mlx_ptr, data->win_ptr, data->img_prt);
+	ft_free_mlx_linux(data->mlx_ptr, data->win_ptr, data->img_prt);
 	free(data->mlx_ptr);
 	ft_free_data(data);
 	exit(1);

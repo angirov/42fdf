@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exits.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vangirov <vangirov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 16:00:36 by vangirov          #+#    #+#             */
-/*   Updated: 2022/06/12 23:06:10 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/08/28 20:55:33 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,22 @@ void	ft_free_data(t_fdf *data)
 	free(data);
 }
 
+void	ft_free_mlx_linux(void *mlx_ptr, void *win_ptr, void *img_prt)
+{
+	mlx_destroy_image(mlx_ptr, img_prt);
+	mlx_destroy_window(mlx_ptr, win_ptr);
+	mlx_destroy_display(mlx_ptr);
+}
+
+void	ft_free_mlx_macos(void *mlx_ptr, void *win_ptr, void *img_prt)
+{
+	mlx_destroy_image(mlx_ptr, img_prt);
+	mlx_destroy_window(mlx_ptr, win_ptr);
+}
+
 int	ft_destroy(t_fdf *data)
 {
-	mlx_destroy_image(data->mlx_ptr, data->img_prt);
+	ft_free_mlx_macos(data->mlx_ptr, data->win_ptr, data->img_prt);
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	ft_free_data(data);
 	exit(1);
