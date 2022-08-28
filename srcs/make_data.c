@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vangirov <vangirov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 13:03:50 by vangirov          #+#    #+#             */
-/*   Updated: 2022/06/12 22:46:25 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/08/28 20:38:05 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_init_mlx(t_fdf *data)
 	data->img_prt = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	if (!data->img_prt)
 		ft_error(data, "mlx_new_image failed");
-	data->addr = mlx_get_data_addr(data->img_prt,
+	data->img_addr = mlx_get_data_addr(data->img_prt,
 			&data->bits_per_pixel, &data->line_length,
 			&data->endian);
 }
