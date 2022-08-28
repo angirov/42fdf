@@ -8,7 +8,10 @@ SRCS_FILES =	main.c \
 				rotation.c \
 				key_hooks.c \
 				projections.c \
-				exits_linux.c
+				exits_linux.c \
+				mlx_api/free_mlx.c
+
+
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 
 OBJ = ${SRCS:.c=.o}
@@ -31,7 +34,9 @@ ALL_LIBS = $(LIBFT_PRINTF_A) $(LIBFT_A)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 MLX_FLAFS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
-INCLUDES_LOCAL = -I$(SRCS_DIR) -I$(LIBFT_DIR) -I$(LIBFT_PRINTF_DIR)
+MODULES = mlx_api 
+I_MODULES = -I$(addprefix $(SRCS_DIR), $(MODULES))
+INCLUDES_LOCAL = -I$(SRCS_DIR) -I$(LIBFT_DIR) -I$(LIBFT_PRINTF_DIR) $(I_MODULES)
 # ========== rules ==========
 all: $(NAME)
 
