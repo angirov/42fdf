@@ -50,7 +50,22 @@
 
 # endif
 
-void	ft_free_mlx_linux(void *mlx_ptr, void *win_ptr, void *img_prt);
-void	ft_free_mlx_macos(void *mlx_ptr, void *win_ptr, void *img_prt);
+typedef struct s_graphics
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	void	*img_prt;
+	char	*img_addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
+}	t_graphics;
+
+void	api_put_pixel(t_graphics *data, int x, int y, int color);
+
+void	api_free_graphics_linux(void *mlx_ptr, void *win_ptr, void *img_prt);
+void	api_free_graphics_macos(void *mlx_ptr, void *win_ptr, void *img_prt);
 
 #endif

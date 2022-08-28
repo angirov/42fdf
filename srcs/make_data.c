@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 13:03:50 by vangirov          #+#    #+#             */
-/*   Updated: 2022/08/28 20:38:05 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/08/28 22:03:59 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,20 @@ void	ft_check_input(int argc, char **argv)
 		return ;
 }
 
-void	ft_init_mlx(t_fdf *data)
+void	api_init_graphics(t_fdf *data)
 {
-	data->mlx_ptr = mlx_init();
-	if (!data->mlx_ptr)
+	data->graphics->mlx_ptr = mlx_init();
+	if (!data->graphics->mlx_ptr)
 		ft_error(data, "mlx_init failed");
-	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, TITLE);
-	if (!data->mlx_ptr)
+	data->graphics->win_ptr = mlx_new_window(data->graphics->mlx_ptr, WIDTH, HEIGHT, TITLE);
+	if (!data->graphics->mlx_ptr)
 		ft_error(data, "mlx_new_window failed");
-	data->img_prt = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
-	if (!data->img_prt)
+	data->graphics->img_prt = mlx_new_image(data->graphics->mlx_ptr, WIDTH, HEIGHT);
+	if (!data->graphics->img_prt)
 		ft_error(data, "mlx_new_image failed");
-	data->img_addr = mlx_get_data_addr(data->img_prt,
-			&data->bits_per_pixel, &data->line_length,
-			&data->endian);
+	data->graphics->img_addr = mlx_get_data_addr(data->graphics->img_prt,
+			&data->graphics->bits_per_pixel, &data->graphics->line_length,
+			&data->graphics->endian);
 }
 
 int	get_width(const char *map_file_name)

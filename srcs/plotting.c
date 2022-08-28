@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plotting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vangirov <vangirov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 10:04:57 by vangirov          #+#    #+#             */
-/*   Updated: 2022/06/12 23:07:46 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/08/28 21:59:17 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	ft_plot_map(t_fdf *data)
 		}
 		y++;
 	}
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-		data->img_prt, 0, 0);
+	mlx_put_image_to_window(data->graphics->mlx_ptr, data->graphics->win_ptr,
+		data->graphics->img_prt, 0, 0);
 }
 
 t_point	ft_set_point(t_point p, t_fdf *data)

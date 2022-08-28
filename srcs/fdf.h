@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 19:05:05 by vangirov          #+#    #+#             */
-/*   Updated: 2022/08/28 21:10:09 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/08/28 22:03:59 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,30 +58,25 @@ typedef struct s_fpoint
 
 typedef struct s_fdf
 {
-	int		width;
-	int		height;
-	t_point	**matrix;
-	int		zoom;
-	int		z_scale;
-	int		proj;
-	int		color;
-	float	angle;
-	int		pivot_x;
-	int		pivot_y;
-	int		offset_x;
-	int		offset_y;
-	int		shift_x;
-	int		shift_y;
-	float	alpha;
-	float	beta;
-	float	gamma;
-	void	*mlx_ptr;
-	void	*win_ptr;
-	void	*img_prt;
-	char	*img_addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+	t_graphics	*graphics;
+	int			width;
+	int			height;
+	t_point		**matrix;
+	int			zoom;
+	int			z_scale;
+	int			proj;
+	int			color;
+	float		angle;
+	int			pivot_x;
+	int			pivot_y;
+	int			offset_x;
+	int			offset_y;
+	int			shift_x;
+	int			shift_y;
+	float		alpha;
+	float		beta;
+	float		gamma;
+
 }	t_fdf;
 
 # define WHITE 0xffffff
@@ -89,7 +84,7 @@ typedef struct s_fdf
 
 // make_data
 void	ft_check_input(int argc, char **argv);
-void	ft_init_mlx(t_fdf *data);
+void	api_init_graphics(t_fdf *data);
 t_fdf	*ft_make_data(char *map_file_name);
 
 // read_map.c

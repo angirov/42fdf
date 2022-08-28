@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 16:00:36 by vangirov          #+#    #+#             */
-/*   Updated: 2022/08/28 21:13:18 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/08/28 22:07:38 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void	ft_free_data(t_fdf *data)
 
 int	ft_destroy(t_fdf *data)
 {
-	ft_free_mlx_macos(data->mlx_ptr, data->win_ptr, data->img_prt);
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	api_free_graphics_macos(data->graphics->mlx_ptr, data->graphics->win_ptr, data->graphics->img_prt);
+	free(data->graphics->mlx_ptr);
 	ft_free_data(data);
 	exit(1);
 }
