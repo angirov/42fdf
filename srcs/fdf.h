@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 19:05:05 by vangirov          #+#    #+#             */
-/*   Updated: 2022/08/28 23:20:35 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/08/29 18:03:54 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,16 +96,16 @@ void	fill_matrix(const char *map_file_name, \
 void	read_map(const char *map_file_name, t_fdf *data);
 
 // key_hooks.c
-int		deal_key(int key, t_fdf *data);
+int		deal_key(int key, t_game *game);
 void	ft_proj_isometric(t_fdf *data);
 void	ft_proj_parallel(t_fdf *data);
 
 // ploting.c
 void	ft_plot_map(t_fdf *data);
 t_point	ft_set_point(t_point p, t_fdf *data);
-void	ft_plot_line(t_point p0, t_point p1, t_fdf *data);
+void	ft_plot_line(t_point p0, t_point p1, t_graphics *data);
 int		ft_line_color(t_fpoint p0, t_fpoint p1);
-void	ft_put_pixel(t_fdf *data, int x, int y, int color);
+void	ft_put_pixel(t_graphics *graphics, int x, int y, int color);
 
 // read_map.c
 void	read_map(const char *map_file_name, t_fdf *data);

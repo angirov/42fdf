@@ -9,7 +9,8 @@ SRCS_FILES =	main.c \
 				key_hooks.c \
 				projections.c \
 				exits_linux.c \
-				mlx_api/free_mlx.c
+				mlx_api/free_mlx.c \
+				game/game.c
 
 
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_FILES))
@@ -32,7 +33,7 @@ ALL_LIBS = $(LIBFT_PRINTF_A) $(LIBFT_A)
 
 # ========== compilation ==========
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -Wno-unused-parameter
 MLX_FLAFS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 MODULES = 	mlx_api \
 			game

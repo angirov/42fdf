@@ -6,58 +6,58 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 10:04:57 by vangirov          #+#    #+#             */
-/*   Updated: 2022/08/28 21:59:17 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/08/29 18:07:49 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_plot_map(t_fdf *data)
-{
-	int	y;
-	int	x;
+// void	ft_plot_map(t_fdf *data)
+// {
+// 	int	y;
+// 	int	x;
 
-	y = 0;
-	while (y < data->height)
-	{
-		x = 0;
-		while (x < data->width)
-		{
-			if (x < data->width - 1)
-				ft_plot_line(
-					ft_set_point(data->matrix[y][x], data),
-					ft_set_point(data->matrix[y][x + 1], data), data);
-			if (y < data->height - 1)
-				ft_plot_line(
-					ft_set_point(data->matrix[y][x], data),
-					ft_set_point(data->matrix[y + 1][x], data), data);
-			x++;
-		}
-		y++;
-	}
-	mlx_put_image_to_window(data->graphics->mlx_ptr, data->graphics->win_ptr,
-		data->graphics->img_prt, 0, 0);
-}
+// 	y = 0;
+// 	while (y < data->height)
+// 	{
+// 		x = 0;
+// 		while (x < data->width)
+// 		{
+// 			if (x < data->width - 1)
+// 				ft_plot_line(
+// 					ft_set_point(data->matrix[y][x], data),
+// 					ft_set_point(data->matrix[y][x + 1], data), data);
+// 			if (y < data->height - 1)
+// 				ft_plot_line(
+// 					ft_set_point(data->matrix[y][x], data),
+// 					ft_set_point(data->matrix[y + 1][x], data), data);
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// 	mlx_put_image_to_window(data->mlx_data->mlx_ptr, data->mlx_data->win_ptr,
+// 		data->mlx_data->img_prt, 0, 0);
+// }
 
-t_point	ft_set_point(t_point p, t_fdf *data)
-{
-	ft_scale_point(&p, data);
-	p.x = p.x - data->pivot_x;
-	p.y = p.y - data->pivot_y;
-	x_rotate(&p.y, &p.z, data->alpha);
-	y_rotate(&p.x, &p.z, data->beta);
-	z_rotate(&p.x, &p.y, data->gamma);
-	if (data->proj == 1)
-		ft_isometric(&p.x, &p.y, &p.z);
-	if (data->proj == 2)
-		ft_cabinet(&p.x, &p.y, &p.z);
-	p.x = p.x + data->pivot_x;
-	p.y = p.y + data->pivot_y;
-	ft_shift_point(&p, data);
-	return (p);
-}
+// t_point	ft_set_point(t_point p, t_fdf *data)
+// {
+// 	ft_scale_point(&p, data);
+// 	p.x = p.x - data->pivot_x;
+// 	p.y = p.y - data->pivot_y;
+// 	x_rotate(&p.y, &p.z, data->alpha);
+// 	y_rotate(&p.x, &p.z, data->beta);
+// 	z_rotate(&p.x, &p.y, data->gamma);
+// 	if (data->proj == 1)
+// 		ft_isometric(&p.x, &p.y, &p.z);
+// 	if (data->proj == 2)
+// 		ft_cabinet(&p.x, &p.y, &p.z);
+// 	p.x = p.x + data->pivot_x;
+// 	p.y = p.y + data->pivot_y;
+// 	ft_shift_point(&p, data);
+// 	return (p);
+// }
 
-void	ft_plot_f_line(t_fpoint p0, t_fpoint p1, t_fdf *data)
+void	ft_plot_f_line(t_fpoint p0, t_fpoint p1, t_graphics *data)
 {
 	float	dx;
 	float	dy;
@@ -76,7 +76,21 @@ void	ft_plot_f_line(t_fpoint p0, t_fpoint p1, t_fdf *data)
 	}
 }
 
-void	ft_plot_line(t_point p0, t_point p1, t_fdf *data)
+void	draw_line(t_loc l0, t_loc l1, t_graphics *graphics)
+{
+	t_point	p0;
+	t_point	p1;
+
+	p0.x = l0.x;
+	p0.y = l0.y;
+	p0.color = RED;
+	p1.x = l1.x;
+	p1.y = l1.y;
+	p1.color = RED;
+	ft_plot_line(p0, p1, graphics);
+}
+
+void	ft_plot_line(t_point p0, t_point p1, t_graphics *data)
 {
 	t_fpoint	fpoint0;
 	t_fpoint	fpoint1;
