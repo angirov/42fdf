@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 19:05:05 by vangirov          #+#    #+#             */
-/*   Updated: 2022/08/29 18:03:54 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/09/08 23:25:43 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	ft_proj_parallel(t_fdf *data);
 // ploting.c
 void	ft_plot_map(t_fdf *data);
 t_point	ft_set_point(t_point p, t_fdf *data);
-void	ft_plot_line(t_point p0, t_point p1, t_graphics *data);
+void	ft_plot_line(t_point p0, t_point p1, int color, t_graphics *g);
 int		ft_line_color(t_fpoint p0, t_fpoint p1);
 void	ft_put_pixel(t_graphics *graphics, int x, int y, int color);
 

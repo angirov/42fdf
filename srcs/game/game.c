@@ -1,9 +1,9 @@
 #include "game.h"
 
-void	player_set_location(t_player *player, int x, int y)
+void	player_set_location(t_player *player, t_loc loc)
 {
-	player->loc.x = x;
-	player->loc.y = y;
+	player->loc.x = loc.x;
+	player->loc.y = loc.y;
 }
 
 void	player_move_N(t_player *player)
@@ -34,8 +34,11 @@ void	player_turn_left(t_player *player)
 }
 
 
-void	map_set_sizes(t_map *map, int width, int heigth)
+void	map_set_sizes(t_map *map, int grid_width, int grid_heigth, int scale)
 {
-	map->width = width;
-	map->height = heigth;
+	map->grid.width = grid_width;
+	map->grid.heigth = grid_heigth;
+	map->grid.scale = scale;
+	map->px_width = map->grid.width * map->grid.scale;
+	map->px_heigth = map->grid.heigth * map->grid.scale;
 }

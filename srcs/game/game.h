@@ -9,8 +9,8 @@ typedef struct s_game	t_game;
 
 typedef struct s_loc
 {
-	int	x;
-	int	y;
+	double	x;
+	double	y;
 } t_loc;
 
 typedef struct s_player
@@ -19,15 +19,23 @@ typedef struct s_player
 	t_loc	loc;
 	float	direction;
 	float	rotation_rate;
-	int		speed;
+	double		speed;
 }	t_player;
+
+typedef struct s_grid
+{
+	int	heigth;
+	int	width;
+	int	scale;
+}	t_grid;
 
 typedef struct s_map
 {
 	t_game		*game;
 	t_player	*player;
-	int			width;
-	int			height;
+	t_grid		grid;
+	int			px_width;
+	int			px_heigth;
 }	t_map;
 
 typedef struct s_game
@@ -36,8 +44,8 @@ typedef struct s_game
 	t_graphics	*graphics;
 }	t_game;
 
-void	map_set_sizes(t_map *map, int width, int heigth);
-void	player_set_location(t_player *player, int x, int y);
+void	map_set_sizes(t_map *map, int width, int heigth, int scale);
+void	player_set_location(t_player *player, t_loc loc);
 
 // void	player_move_forward(t_player *player);
 // void	player_move_back(t_player *player);

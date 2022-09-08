@@ -61,6 +61,7 @@ typedef struct s_graphics
 	int		endian;
 	int		width;
 	int		height;
+	int		scale;
 }	t_graphics;
 
 t_graphics	*api_init_graphics(int widht, int height, char *title);

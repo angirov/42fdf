@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 10:04:57 by vangirov          #+#    #+#             */
-/*   Updated: 2022/08/29 18:07:49 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/09/08 23:25:13 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@
 // 	return (p);
 // }
 
-void	ft_plot_f_line(t_fpoint p0, t_fpoint p1, t_graphics *data)
+void	ft_plot_f_line(t_fpoint p0, t_fpoint p1, int color, t_graphics *g)
 {
 	float	dx;
 	float	dy;
@@ -70,27 +70,27 @@ void	ft_plot_f_line(t_fpoint p0, t_fpoint p1, t_graphics *data)
 	dy /= max;
 	while ((int)(p0.x - p1.x) || (int)(p0.y - p1.y))
 	{
-		ft_put_pixel(data, p0.x, p0.y, ft_line_color(p0, p1));
+		ft_put_pixel(g, p0.x, p0.y, color);
 		p0.x += dx;
 		p0.y += dy;
 	}
 }
 
-void	draw_line(t_loc l0, t_loc l1, t_graphics *graphics)
+void	draw_line(t_loc l0, t_loc l1, int scale, int color, t_graphics *g)
 {
-	t_point	p0;
-	t_point	p1;
+	t_point	pt_px0;
+	t_point	pt_px1;
 
-	p0.x = l0.x;
-	p0.y = l0.y;
-	p0.color = RED;
-	p1.x = l1.x;
-	p1.y = l1.y;
-	p1.color = RED;
-	ft_plot_line(p0, p1, graphics);
+	pt_px0.x = l0.x * scale;
+	pt_px0.y = l0.y * scale;
+	pt_px0.color = color;
+	pt_px1.x = l1.x * scale;
+	pt_px1.y = l1.y * scale;
+	pt_px1.color = color;
+	ft_plot_line(pt_px0, pt_px1, color, g);
 }
 
-void	ft_plot_line(t_point p0, t_point p1, t_graphics *data)
+void	ft_plot_line(t_point p0, t_point p1, int color, t_graphics *g)
 {
 	t_fpoint	fpoint0;
 	t_fpoint	fpoint1;
@@ -101,7 +101,7 @@ void	ft_plot_line(t_point p0, t_point p1, t_graphics *data)
 	fpoint1.y = p1.y;
 	fpoint0.color = p0.color;
 	fpoint1.color = p1.color;
-	ft_plot_f_line(fpoint0, fpoint1, data);
+	ft_plot_f_line(fpoint0, fpoint1, color, g);
 }
 
 int	ft_line_color(t_fpoint p0, t_fpoint p1)

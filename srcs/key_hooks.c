@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:57:53 by vangirov          #+#    #+#             */
-/*   Updated: 2022/08/29 18:19:56 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/09/08 23:39:16 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,11 @@ int	deal_key(int key, t_game *game)
 	if (key == KEY_W)
 		player_turn_right(game->map->player);
 
+	printf("loc: %lf : %lf\n",	game->map->player->loc.x,
+								game->map->player->loc.y);
+	printf("squ: %d : %d\n",	(int)game->map->player->loc.x,
+								(int)game->map->player->loc.y);
+	
 	ft_clear_image(game->graphics);
 	draw_all(game);
 
