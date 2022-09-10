@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 19:05:05 by vangirov          #+#    #+#             */
-/*   Updated: 2022/09/08 23:25:43 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/09/10 07:59:51 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,11 @@ typedef struct s_fdf
 # define WHITE 0xffffff
 # define RED 0xe80c0c
 
+
+double	rtd(double radians);
+double	dtr(double degrees);
+
+
 // make_data
 void	ft_check_input(int argc, char **argv);
 t_fdf	*ft_make_data(char *map_file_name);
@@ -127,7 +132,7 @@ void	ft_shift_point(t_point *p, t_fdf *data);
 void	ft_reset_angles(t_fdf *data);
 void	ft_isometric(int *x, int *y, int *z);
 void	ft_cabinet(int *x, int *y, int *z);
-float	ft_abs(float a);
+double	ft_abs(double a);
 float	ft_max(float a, float b);
 
 // exit.c

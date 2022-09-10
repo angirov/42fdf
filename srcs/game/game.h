@@ -15,11 +15,11 @@ typedef struct s_loc
 
 typedef struct s_player
 {
-	t_map	*map;
+	t_game	*game;
 	t_loc	loc;
-	float	direction;
-	float	rotation_rate;
-	double		speed;
+	double	direction;
+	double	rotation_rate;
+	double	speed;
 }	t_player;
 
 typedef struct s_grid
@@ -29,22 +29,18 @@ typedef struct s_grid
 	int	scale;
 }	t_grid;
 
-typedef struct s_map
+typedef struct s_game
 {
+	t_graphics	*graphics;
 	t_game		*game;
 	t_player	*player;
 	t_grid		grid;
 	int			px_width;
 	int			px_heigth;
-}	t_map;
-
-typedef struct s_game
-{
-	t_map		*map;
-	t_graphics	*graphics;
+	// int			*map; //(*map)[24];  // https://stackoverflow.com/questions/1052818
 }	t_game;
 
-void	map_set_sizes(t_map *map, int width, int heigth, int scale);
+void	set_sizes(t_game *game, int width, int heigth, int scale);
 void	player_set_location(t_player *player, t_loc loc);
 
 // void	player_move_forward(t_player *player);

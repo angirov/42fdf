@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   projections.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vangirov <vangirov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:22:12 by vangirov          #+#    #+#             */
-/*   Updated: 2022/06/12 23:00:16 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/09/10 08:30:39 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ void	ft_cabinet(int *x, int *y, int *z)
 	*y = tmp_y * 0.5 - *z;
 }
 
-float	ft_abs(float a)
-{
-	if (a >= 0)
-		return (a);
-	return (a * -1);
-}
+// double	ft_abs(double a)
+// {
+// 	if (a >= 0)
+// 		return (a);
+// 	return (a * -1);
+// }
 
 float	ft_max(float a, float b)
 {
