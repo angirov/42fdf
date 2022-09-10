@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 19:05:05 by vangirov          #+#    #+#             */
-/*   Updated: 2022/09/08 23:25:43 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/09/10 10:14:58 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,6 @@ void	ft_shift_point(t_point *p, t_fdf *data);
 void	ft_reset_angles(t_fdf *data);
 void	ft_isometric(int *x, int *y, int *z);
 void	ft_cabinet(int *x, int *y, int *z);
-float	ft_abs(float a);
 float	ft_max(float a, float b);
 
 // exit.c
@@ -135,5 +134,13 @@ void	ft_error(t_fdf *data, char *message);
 void	ft_escape(t_fdf *data);
 void	ft_free_data(t_fdf *data);
 int		ft_destroy(t_fdf *data);
+
+// utils
+t_loc	dir2vec(double radians);
+t_loc	add_vecs(t_loc vec1, t_loc vec2);
+t_loc	sc_mult(t_loc vec, double scalar);
+double	rtd(double radians);
+double	dtr(double degrees);
+double	ft_abs(double num);
 
 #endif

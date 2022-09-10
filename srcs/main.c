@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 14:20:19 by vangirov          #+#    #+#             */
-/*   Updated: 2022/09/08 23:33:05 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/09/10 10:15:48 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,6 @@ void fill_sqare(t_graphics *data, t_player *p, int side, int color)
 	for (int i = 0; i < side; i++)
 		for (int j = 0; j < side; j++)
 			api_put_pixel(data, corner_x + i, corner_y + j, color);
-}
-
-float	rtd(float radians)
-{
-	return (radians * 180 / M_PI);
-}
-
-float	dtr(float degrees)
-{
-	return (degrees / 180 * M_PI);
 }
 
 t_loc	rotate_aroud(t_loc center, double radius, float angle)
