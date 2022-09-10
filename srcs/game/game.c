@@ -36,8 +36,6 @@ void	player_turn_left(t_player *player)
 
 void	set_sizes(t_game *game, int grid_width, int grid_heigth, int scale)
 {
-	printf(">>>>> TEST1\n");
-
 	game->grid.width = grid_width;
 	game->grid.heigth = grid_heigth;
 	game->grid.scale = scale;
