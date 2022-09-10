@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 14:20:19 by vangirov          #+#    #+#             */
-/*   Updated: 2022/09/10 10:02:13 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/09/10 10:42:15 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,12 @@ void cast_rays(t_player	*p)
 	t_loc	dir_vec = dir2vec(p->direction);
 	t_loc	center = add_vecs(p->loc, dir_vec);
 	t_loc	plane_vec = dir2vec(p->direction + dtr(90));
-	printf(">>>>> TEST3\n");
+	printf(">>>>> TEST31\n");
 
-	draw_line(p->loc, center, p->game->grid.scale, RED, p->game->game->graphics);
-	draw_line(center, add_vecs(center, plane_vec), p->game->grid.scale, WHITE, p->game->game->graphics);
-	draw_line(center, add_vecs(center, sc_mult(plane_vec, -1)), p->game->grid.scale, WHITE, p->game->game->graphics);
+	draw_line(p->loc, center, p->game->grid.scale, RED, p->game->graphics);
+	printf(">>>>> TEST32\n");
+	draw_line(center, add_vecs(center, plane_vec), p->game->grid.scale, WHITE, p->game->graphics);
+	draw_line(center, add_vecs(center, sc_mult(plane_vec, -1)), p->game->grid.scale, WHITE, p->game->graphics);
 	// double	planeX = 0, planeY = 0.66; //the 2d raycaster version of camera plane
 	printf(">>>>> TEST33\n");
 
@@ -111,7 +112,7 @@ void cast_rays(t_player	*p)
 		//calculate ray position and direction
 		cameraX = 2 * x / (double)screen - 1; //x-coordinate in camera space
 		rayDir = add_vecs(center, sc_mult(plane_vec, cameraX));
-		draw_line(p->loc, rayDir, p->game->grid.scale, RED, p->game->game->graphics);
+		draw_line(p->loc, rayDir, p->game->grid.scale, RED, p->game->graphics);
 	}
 	// 	double	deltaDistX = sqrt(1 + (rayDir.y * rayDir.y) / (rayDir.x * rayDir.x));
 	// 	double	deltaDistY = sqrt(1 + (rayDir.x * rayDir.x) / (rayDir.y * rayDir.y));
@@ -224,9 +225,9 @@ void	draw_grid(t_game *g)
 
 void	draw_all(t_game *game)
 {
-	// draw_grid(game);
+	draw_grid(game);
 	printf(">>>>> TEST o");
-	// draw_player(game->player);
+	draw_player(game->player);
 	printf(">>>>> TEST oooo");
 	mlx_put_image_to_window(game->graphics->mlx_ptr, game->graphics->win_ptr,
 		game->graphics->img_prt, 0, 0);
@@ -265,9 +266,9 @@ int	main(int argc, char **argv)
 	// 	{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 	// 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 	// };
-	game = (t_game *)malloc(sizeof(game));
+	game = (t_game *)malloc(sizeof(t_game));
 	// game->map = (int *)worldMap;
-	set_sizes(game, 10, 10, 100);
+	set_sizes(game, 24, 24, 50);
 	printf(">>>>> TEST2\n");
 	game->player = (t_player *)malloc(sizeof(t_player));
 	printf(">>>>> TEST22\n");
