@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 14:20:19 by vangirov          #+#    #+#             */
-/*   Updated: 2022/09/10 16:17:00 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/09/10 17:29:12 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,19 @@ void fill_sqare(t_game *g, t_loc corner, int side, int color)
 			api_put_pixel(g->graphics, corner_x + i, corner_y + j, color);
 }
 
+void fill_rect(t_game *g, t_loc corner, int x, int y, int color)
+{
+	int corner_x;
+	int corner_y;
+
+	corner_x = corner.x * g->grid.scale;
+	corner_y = corner.y * g->grid.scale;
+	
+	for (int i = 0; i < y*g->grid.scale; i++)
+		for (int j = 0; j < x*g->grid.scale; j++)
+			api_put_pixel(g->graphics, corner_x + i, corner_y + j, color);
+}
+
 t_loc	rotate_aroud(t_loc center, double radius, double radians)
 {
 	t_loc	new;
@@ -98,7 +111,7 @@ void	draw_line(t_loc l0, t_loc l1, int scale, int color, t_graphics *graphics);
 
 void cast_rays(t_player	*p)
 {
-	int		screen = 100;	//px
+	int		screen = p->game->graphics->screen_width;	//px
 	// int		fov = 90;		// degrees
 	
 	t_loc	dir_vec = dir2vec(p->direction);
@@ -106,7 +119,9 @@ void cast_rays(t_player	*p)
 	t_loc	plane_vec = dir2vec(p->direction + dtr(90));
 	
 	p->game->distances = malloc(sizeof(double) * screen);
-	
+	p->game->sides = malloc(sizeof(int) * screen);
+	p->game->ray_dirs = malloc(sizeof(t_loc) * screen);
+
 	for(int x = 0; x < screen; x++)
 	{
 		printf(">>> Ray %2d ", x);
@@ -116,9 +131,10 @@ void cast_rays(t_player	*p)
 		//calculate ray position and direction
 		cameraX = 2 * x / (double)screen - 1; //x-coordinate in camera space
 		rayDir = add_vecs(dir_vec, sc_mult(plane_vec, cameraX));
+		p->game->ray_dirs[x] = rayDir;
 		printf("rD.x: %lf ", rayDir.x);
 		printf("rD.y: %lf\t", rayDir.y);
-		draw_line(p->loc, add_vecs(p->loc, norm_vec(rayDir)), p->game->grid.scale, WHITE, p->game->graphics);
+		// draw_line(p->loc, add_vecs(p->loc, norm_vec(rayDir)), p->game->grid.scale, WHITE, p->game->graphics);
 	
 		double	deltaDistX = sqrt(1 + (rayDir.y * rayDir.y) / (rayDir.x * rayDir.x));
 		double	deltaDistY = sqrt(1 + (rayDir.x * rayDir.x) / (rayDir.y * rayDir.y));
@@ -190,21 +206,46 @@ void cast_rays(t_player	*p)
 			sideDistX = (sideDistX - deltaDistX);
 		else
 			sideDistY = (sideDistY - deltaDistY);
-		t_loc	hit_point;
+		// t_loc	hit_point;
 		if (sideDistX < sideDistY)
 		{
-			hit_point = sc_mult(norm_vec(rayDir), sideDistX);
+			// hit_point = sc_mult(norm_vec(rayDir), sideDistX);
 			p->game->distances[x] = sideDistX;
 		}
 		else
 		{
-			hit_point = sc_mult(norm_vec(rayDir), sideDistY);
+			// hit_point = sc_mult(norm_vec(rayDir), sideDistY);
 			p->game->distances[x] = sideDistY;
 		}
-		draw_line(p->loc, add_vecs(p->loc, hit_point), p->game->grid.scale, RED, p->game->graphics);
+		p->game->sides[x] = side;
+		// draw_line(p->loc, add_vecs(p->loc, hit_point), p->game->grid.scale, RED, p->game->graphics);
 	}
 	for(int x = 0; x < screen; x++)
-		printf("%2d: %lf\n", x, p->game->distances[x]);
+		// printf("%2d: %lf\n", x, p->game->distances[x]);
+	{
+		int h = p->game->graphics->screen_height;
+		int lineHeight = (int)(h / p->game->distances[x]);
+		//calculate lowest and highest pixel to fill in current stripe
+		int drawStart = -lineHeight / 2 + h / 2;
+		if(drawStart < 0)drawStart = 0;
+		int drawEnd = lineHeight / 2 + h / 2;
+		if(drawEnd >= h)drawEnd = h - 1;
+		int color = RED;
+		if (p->game->sides[x] == 1) {color = color / 2;}
+		draw_line((t_loc){x, drawStart}, (t_loc){x, drawEnd}, 1, color, p->game->graphics);
+	}
+}
+
+void	draw_rays(t_game *g)
+{
+	t_loc	hit_point;
+	int		screen = g->graphics->screen_width;	//px
+
+	for(int x = 0; x < screen; x += screen / 50)
+	{
+		hit_point = sc_mult(norm_vec(g->ray_dirs[x]), g->distances[x]);
+		draw_line(g->player->loc, add_vecs(g->player->loc, hit_point), g->grid.scale, YELLOW, g->graphics);
+	}
 }
 
 void	draw_dir(t_player *p)
@@ -217,14 +258,13 @@ void	draw_dir(t_player *p)
 	draw_line(center, tip, s, RED, p->game->graphics);
 }
 
-void draw_player(t_player *p)
-{
-	// int s = p->game->grid.scale;
-	// printf("x: %d, y: %d\n", p->loc.x, p->loc.y);
-	// fill_sqare(p->game, (t_loc){p->loc.x - 5/s, p->loc.y - 5/s}, 10/s, RED);
-	// draw_dir(p);
-	cast_rays(p);
-}
+// void draw_player(t_player *p)
+// {
+// 	// int s = p->game->grid.scale;
+// 	// printf("x: %d, y: %d\n", p->loc.x, p->loc.y);
+// 	// fill_sqare(p->game, (t_loc){p->loc.x - 5/s, p->loc.y - 5/s}, 10/s, RED);
+// 	// draw_dir(p);
+// }
 
 int map_value(t_game *g, int x, int y)
 {
@@ -236,7 +276,12 @@ void fill_grid(t_game *g, int x, int y, int scale)
 	// int s = g->grid.scale;
 	if (map_value(g, x, y) > 0)
 		// printf("%d", g->map[y * g->grid.width + x]);
-		fill_sqare(g, (t_loc){x, y}, 1, WHITE);
+		fill_sqare(g, (t_loc){x, y}, 1, GRAY);
+}
+
+void map_background(t_game *g)
+{
+	fill_rect(g, (t_loc){0, 0}, g->grid.width, g->grid.heigth, L_GRAY);
 }
 
 void	draw_grid(t_game *g)
@@ -255,10 +300,10 @@ void	draw_grid(t_game *g)
 		{
 			if (x < g->grid.width)
 			{
-				draw_line((t_loc){x, y}, (t_loc){x + 1, y}, s, WHITE, g->graphics);
+				draw_line((t_loc){x, y}, (t_loc){x + 1, y}, s, GRAY, g->graphics);
 			}
 			if (y <= g->grid.heigth)
-				draw_line((t_loc){x, y}, (t_loc){x, y + 1}, s, WHITE, g->graphics);
+				draw_line((t_loc){x, y}, (t_loc){x, y + 1}, s, GRAY, g->graphics);
 			fill_grid(g, x, y, s);
 			x++;
 		}
@@ -268,8 +313,10 @@ void	draw_grid(t_game *g)
 
 void	draw_all(t_game *game)
 {
+	cast_rays(game->player);
+	map_background(game);
 	draw_grid(game);
-	draw_player(game->player);
+	draw_rays(game);
 	mlx_put_image_to_window(game->graphics->mlx_ptr, game->graphics->win_ptr,
 		game->graphics->img_prt, 0, 0);
 }
@@ -278,8 +325,8 @@ int	main(int argc, char **argv)
 {
 	t_game	*game;
 
-	// int	map_w = 10;
-	// int	map_h = 10;
+	int	map_w = 24;
+	int	map_h = 24;
 	int	worldMap[24][24]=
 	{
 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
@@ -309,7 +356,7 @@ int	main(int argc, char **argv)
 	};
 	game = (t_game *)malloc(sizeof(t_game));
 	game->map = (int *)worldMap;
-	set_sizes(game, 24, 24, 30);
+	set_sizes(game, map_w, map_h, 20);
 	game->player = (t_player *)malloc(sizeof(t_player));
 	game->player->game = game;
 	player_set_location(game->player, (t_loc){3.593465, 4.772435});
@@ -318,7 +365,7 @@ int	main(int argc, char **argv)
 	game->player->direction = dtr(90 + 180);
 	game->player->rotation_rate = dtr(15);
 
-	game->graphics = api_init_graphics(game->px_width + 100, game->px_heigth + 100, TITLE);
+	game->graphics = api_init_graphics(1600, 800, TITLE);
 
 	draw_all(game);
 	// mlx_hook(data->graphics->win_ptr, 17, 0, ft_destroy, data);

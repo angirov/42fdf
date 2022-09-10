@@ -19,7 +19,7 @@ void api_put_pixel(t_graphics *api_data, int x, int y, int color)
 {
 	char *dst;
 
-	if (x >= 0 && x < api_data->width && y >= 0 && y < api_data->height)
+	if (x >= 0 && x < api_data->screen_width && y >= 0 && y < api_data->screen_height)
 	{
 		dst = api_data->img_addr + (y * api_data->line_length + x * (api_data->bits_per_pixel / 8));
 		*(unsigned int *)dst = color;
@@ -31,8 +31,8 @@ t_graphics	*api_init_graphics(int width, int height, char *title)
 	t_graphics *api_data;
 
 	api_data = (t_graphics *)malloc(sizeof(t_graphics));
-	api_data->width = width;
-	api_data->height = height;
+	api_data->screen_width = width;
+	api_data->screen_height = height;
 	api_data->mlx_ptr = mlx_init();
 	// if (!api_data->mlx_ptr)
 	// 	api_error(api_data, "mlx_init failed");

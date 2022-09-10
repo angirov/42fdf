@@ -59,8 +59,8 @@ typedef struct s_graphics
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	int		width;
-	int		height;
+	int		screen_width;
+	int		screen_height;
 	int		scale;
 }	t_graphics;
 

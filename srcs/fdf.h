@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 19:05:05 by vangirov          #+#    #+#             */
-/*   Updated: 2022/09/10 07:59:51 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/09/10 17:28:48 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@
 // colors
 # define WHITE 0xffffff
 # define RED 0xe80c0c
+# define YELLOW 0xe69138
+# define GRAY 0x444444
+# define L_GRAY 0xbebebe
 
 # include "mlx_api.h"
 # include "game.h"
