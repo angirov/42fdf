@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 14:20:19 by vangirov          #+#    #+#             */
-/*   Updated: 2022/09/10 10:15:48 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/09/10 10:28:20 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void fill_sqare(t_graphics *data, t_player *p, int side, int color)
 	int corner_x;
 	int corner_y;
 
-	corner_x = p->loc.x * p->map->grid.scale - side / 2;
-	corner_y = p->loc.y * p->map->grid.scale - side / 2;
+	corner_x = p->loc.x * p->game->grid.scale - side / 2;
+	corner_y = p->loc.y * p->game->grid.scale - side / 2;
 	
 	for (int i = 0; i < side; i++)
 		for (int j = 0; j < side; j++)
@@ -40,18 +40,18 @@ void	draw_line(t_loc l0, t_loc l1, int scale, int color, t_graphics *graphics);
 
 void	draw_dir(t_player *p)
 {
-	double	len = p->map->grid.width * 3;
-	int s = p->map->grid.scale;
+	double	len = p->game->grid.width * 3;
+	int s = p->game->grid.scale;
 	
 	t_loc center = p->loc;
 	t_loc tip = rotate_aroud(center, len, p->direction);
-	draw_line(center, tip, s, RED, p->map->game->graphics);
+	draw_line(center, tip, s, RED, p->game->graphics);
 }
 
 void draw_player(t_player *player)
 {
 	// printf("x: %d, y: %d\n", player->loc.x, player->loc.y);
-	fill_sqare(player->map->game->graphics, player, 10, RED);
+	fill_sqare(player->game->graphics, player, 10, RED);
 	draw_dir(player);
 }
 
@@ -61,16 +61,16 @@ void	draw_grid(t_game *g)
 	int	y;
 	int	s;
 
-	s = g->map->grid.scale;
+	s = g->grid.scale;
 	y = 0;
-	while (y <= g->map->grid.heigth)
+	while (y <= g->grid.heigth)
 	{
 		x = 0;
-		while (x <= g->map->grid.width)
+		while (x <= g->grid.width)
 		{
-			if (x < g->map->grid.width)
+			if (x < g->grid.width)
 				draw_line((t_loc){x, y}, (t_loc){x + s, y}, s, WHITE, g->graphics);
-			if (y <= g->map->grid.heigth)
+			if (y <= g->grid.heigth)
 				draw_line((t_loc){x, y}, (t_loc){x, y + s}, s, WHITE, g->graphics);
 			x++;
 		}
@@ -81,7 +81,7 @@ void	draw_grid(t_game *g)
 void	draw_all(t_game *game)
 {
 	draw_grid(game);
-	draw_player(game->map->player);
+	draw_player(game->player);
 	mlx_put_image_to_window(game->graphics->mlx_ptr, game->graphics->win_ptr,
 		game->graphics->img_prt, 0, 0);
 }
@@ -90,18 +90,18 @@ int	main(int argc, char **argv)
 {
 	t_game	*game;
 
-	game = (t_game *)malloc(sizeof(game));
-	game->map = (t_map *)malloc(sizeof(t_map));
-	map_set_sizes(game->map, 20, 20, 40);
-	game->map->game = game;
-	game->map->player = (t_player *)malloc(sizeof(t_player));
-	game->map->player->map = game->map;
-	player_set_location(game->map->player, (t_loc){3.593465, 4.772435});
-	game->map->player->speed = 0.355678;
-	game->map->player->direction = 90;
-	game->map->player->rotation_rate = dtr(15);
+	game = (t_game *)malloc(sizeof(t_game));
+	// game->map = (t_map *)malloc(sizeof(t_map));
+	grid_set_sizes(game, 20, 20, 40);
 
-	game->graphics = api_init_graphics(game->map->px_width + 1, game->map->px_heigth + 1, TITLE);
+	game->player = (t_player *)malloc(sizeof(t_player));
+	game->player->game = game;
+	player_set_location(game->player, (t_loc){3.593465, 4.772435});
+	game->player->speed = 0.355678;
+	game->player->direction = 90;
+	game->player->rotation_rate = dtr(15);
+
+	game->graphics = api_init_graphics(game->px_width + 1, game->px_heigth + 1, TITLE);
 
 	draw_all(game);
 	// mlx_hook(data->graphics->win_ptr, 17, 0, ft_destroy, data);

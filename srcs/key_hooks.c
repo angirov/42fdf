@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:57:53 by vangirov          #+#    #+#             */
-/*   Updated: 2022/09/08 23:39:16 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/09/10 10:25:40 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,34 +38,34 @@ int	deal_key(int key, t_game *game)
 {
 	if (key == KEY_LEFT)
 	{
-		player_move_W(game->map->player);
+		player_move_W(game->player);
 		printf("move W\n");
 	}
 	if (key == KEY_UP)
 	{
-		player_move_N(game->map->player);
+		player_move_N(game->player);
 		printf("move N\n");
 	}
 	if (key == KEY_RIGHT)
 	{
-		player_move_E(game->map->player);
+		player_move_E(game->player);
 		printf("move E\n");
 	}
 	if (key == KEY_DOWN)
 	{
-		player_move_S(game->map->player);
+		player_move_S(game->player);
 		printf("move S\n");
 	}
 
 	if (key == KEY_Q)
-		player_turn_left(game->map->player);
+		player_turn_left(game->player);
 	if (key == KEY_W)
-		player_turn_right(game->map->player);
+		player_turn_right(game->player);
 
-	printf("loc: %lf : %lf\n",	game->map->player->loc.x,
-								game->map->player->loc.y);
-	printf("squ: %d : %d\n",	(int)game->map->player->loc.x,
-								(int)game->map->player->loc.y);
+	printf("loc: %lf : %lf\n",	game->player->loc.x,
+								game->player->loc.y);
+	printf("squ: %d : %d\n",	(int)game->player->loc.x,
+								(int)game->player->loc.y);
 	
 	ft_clear_image(game->graphics);
 	draw_all(game);

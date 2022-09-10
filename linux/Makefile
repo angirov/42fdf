@@ -9,6 +9,7 @@ SRCS_FILES =	main.c \
 				key_hooks.c \
 				projections.c \
 				exits_linux.c \
+				utils.c \
 				mlx_api/free_mlx.c \
 				game/game.c
 

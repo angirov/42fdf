@@ -4,7 +4,7 @@
 # include "mlx_api.h"
 # include <stdio.h>
 
-typedef struct s_map	t_map;
+// typedef struct s_map	t_map;
 typedef struct s_game	t_game;
 
 typedef struct s_loc
@@ -15,7 +15,7 @@ typedef struct s_loc
 
 typedef struct s_player
 {
-	t_map	*map;
+	t_game	*game;
 	t_loc	loc;
 	float	direction;
 	float	rotation_rate;
@@ -29,22 +29,25 @@ typedef struct s_grid
 	int	scale;
 }	t_grid;
 
-typedef struct s_map
+// typedef struct s_map
+// {
+// 	t_game		*game;
+// 	t_player	*player;
+// 	t_grid		grid;
+// 	int			px_width;
+// 	int			px_heigth;
+// }	t_map;
+
+typedef struct s_game
 {
-	t_game		*game;
+	t_graphics	*graphics;
 	t_player	*player;
 	t_grid		grid;
 	int			px_width;
 	int			px_heigth;
-}	t_map;
-
-typedef struct s_game
-{
-	t_map		*map;
-	t_graphics	*graphics;
 }	t_game;
 
-void	map_set_sizes(t_map *map, int width, int heigth, int scale);
+void	grid_set_sizes(t_game *game, int width, int heigth, int scale);
 void	player_set_location(t_player *player, t_loc loc);
 
 // void	player_move_forward(t_player *player);
