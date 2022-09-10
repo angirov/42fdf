@@ -37,6 +37,7 @@ typedef struct s_game
 	int			px_width;
 	int			px_heigth;
 	int			*map; //(*map)[24];  // https://stackoverflow.com/questions/1052818
+	double		*distances;
 }	t_game;
 
 void	set_sizes(t_game *game, int width, int heigth, int scale);

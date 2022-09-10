@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 14:20:19 by vangirov          #+#    #+#             */
-/*   Updated: 2022/09/10 14:29:16 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/09/10 16:17:00 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,9 @@ void cast_rays(t_player	*p)
 	t_loc	dir_vec = dir2vec(p->direction);
 	// t_loc	center = add_vecs(p->loc, dir_vec);
 	t_loc	plane_vec = dir2vec(p->direction + dtr(90));
-
-	// draw_line(p->loc, center, p->game->grid.scale, RED, p->game->graphics);
-	// draw_line(center, add_vecs(center, plane_vec), p->game->grid.scale, WHITE, p->game->graphics);
-	// draw_line(center, add_vecs(center, sc_mult(plane_vec, -1)), p->game->grid.scale, WHITE, p->game->graphics);
-
+	
+	p->game->distances = malloc(sizeof(double) * screen);
+	
 	for(int x = 0; x < screen; x++)
 	{
 		printf(">>> Ray %2d ", x);
@@ -120,7 +118,7 @@ void cast_rays(t_player	*p)
 		rayDir = add_vecs(dir_vec, sc_mult(plane_vec, cameraX));
 		printf("rD.x: %lf ", rayDir.x);
 		printf("rD.y: %lf\t", rayDir.y);
-		// draw_line(p->loc, add_vecs(p->loc, rayDir), p->game->grid.scale, RED, p->game->graphics);
+		draw_line(p->loc, add_vecs(p->loc, norm_vec(rayDir)), p->game->grid.scale, WHITE, p->game->graphics);
 	
 		double	deltaDistX = sqrt(1 + (rayDir.y * rayDir.y) / (rayDir.x * rayDir.x));
 		double	deltaDistY = sqrt(1 + (rayDir.x * rayDir.x) / (rayDir.y * rayDir.y));
@@ -182,23 +180,31 @@ void cast_rays(t_player	*p)
 				side = 1;
 			}
 			//Check if ray has hit a wall
-			if (p->game->map[mapX*24 + mapY] > 0)
+			if (p->game->map[mapY*24 + mapX] > 0)
 				hit = 1;
 		}
 		printf("side: %d", side);
 		printf("SideDistX: %lf ", sideDistX);
 		printf("SideDistY: %lf\n", sideDistY);
+		if(side == 0)
+			sideDistX = (sideDistX - deltaDistX);
+		else
+			sideDistY = (sideDistY - deltaDistY);
 		t_loc	hit_point;
 		if (sideDistX < sideDistY)
 		{
 			hit_point = sc_mult(norm_vec(rayDir), sideDistX);
+			p->game->distances[x] = sideDistX;
 		}
 		else
 		{
 			hit_point = sc_mult(norm_vec(rayDir), sideDistY);
+			p->game->distances[x] = sideDistY;
 		}
 		draw_line(p->loc, add_vecs(p->loc, hit_point), p->game->grid.scale, RED, p->game->graphics);
 	}
+	for(int x = 0; x < screen; x++)
+		printf("%2d: %lf\n", x, p->game->distances[x]);
 }
 
 void	draw_dir(t_player *p)
@@ -249,10 +255,10 @@ void	draw_grid(t_game *g)
 		{
 			if (x < g->grid.width)
 			{
-				draw_line((t_loc){x, y}, (t_loc){x + s, y}, s, WHITE, g->graphics);
+				draw_line((t_loc){x, y}, (t_loc){x + 1, y}, s, WHITE, g->graphics);
 			}
 			if (y <= g->grid.heigth)
-				draw_line((t_loc){x, y}, (t_loc){x, y + s}, s, WHITE, g->graphics);
+				draw_line((t_loc){x, y}, (t_loc){x, y + 1}, s, WHITE, g->graphics);
 			fill_grid(g, x, y, s);
 			x++;
 		}
@@ -312,7 +318,7 @@ int	main(int argc, char **argv)
 	game->player->direction = dtr(90 + 180);
 	game->player->rotation_rate = dtr(15);
 
-	game->graphics = api_init_graphics(game->px_width, game->px_heigth, TITLE);
+	game->graphics = api_init_graphics(game->px_width + 100, game->px_heigth + 100, TITLE);
 
 	draw_all(game);
 	// mlx_hook(data->graphics->win_ptr, 17, 0, ft_destroy, data);
