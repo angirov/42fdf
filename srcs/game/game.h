@@ -32,12 +32,11 @@ typedef struct s_grid
 typedef struct s_game
 {
 	t_graphics	*graphics;
-	t_game		*game;
 	t_player	*player;
 	t_grid		grid;
 	int			px_width;
 	int			px_heigth;
-	// int			*map; //(*map)[24];  // https://stackoverflow.com/questions/1052818
+	int			*map; //(*map)[24];  // https://stackoverflow.com/questions/1052818
 }	t_game;
 
 void	set_sizes(t_game *game, int width, int heigth, int scale);
