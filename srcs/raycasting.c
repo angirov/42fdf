@@ -6,11 +6,11 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 10:32:40 by vangirov          #+#    #+#             */
-/*   Updated: 2022/09/13 10:32:58 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/09/13 11:06:30 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "cub.h"
 
 void cast_rays(t_player	*p)
 {

@@ -6,11 +6,11 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 16:00:36 by vangirov          #+#    #+#             */
-/*   Updated: 2022/08/28 22:07:26 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/09/13 11:06:30 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "cub.h"
 
 void	ft_error(t_fdf *data, char *message)
 {

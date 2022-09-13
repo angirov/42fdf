@@ -6,11 +6,11 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:57:53 by vangirov          #+#    #+#             */
-/*   Updated: 2022/09/13 10:40:43 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/09/13 11:06:30 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "cub.h"
 
 
 void	ft_clear_image(t_graphics *graphics)

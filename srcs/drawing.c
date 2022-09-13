@@ -6,11 +6,11 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 10:23:34 by vangirov          #+#    #+#             */
-/*   Updated: 2022/09/13 10:46:26 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/09/13 11:06:30 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "cub.h"
 
 // Here all rastarization functions are collected
 

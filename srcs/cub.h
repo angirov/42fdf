@@ -6,12 +6,12 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 19:05:05 by vangirov          #+#    #+#             */
-/*   Updated: 2022/09/13 10:48:29 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/09/13 11:06:58 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#ifndef CUB_H
+# define CUB_H
 
 /* for strerror */
 # include <string.h>

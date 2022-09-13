@@ -13,7 +13,7 @@ SRCS = $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 
 OBJ = ${SRCS:.c=.o}
 
-HEADERS = $(SRCS_DIR)fdf.h
+HEADERS = $(SRCS_DIR)cub.h
 
 # ========== libraries ==========
 LIB_DIR = ../libs

@@ -6,11 +6,11 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 10:18:52 by vangirov          #+#    #+#             */
-/*   Updated: 2022/09/13 10:45:21 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/09/13 11:06:30 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "cub.h"
 
 double	vec_len(t_loc vec)
 {

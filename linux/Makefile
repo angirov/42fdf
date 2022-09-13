@@ -1,4 +1,4 @@
-NAME = fdf
+NAME = cub3D
 
 SRCS_DIR = ../srcs/
 SRCS_FILES =	main.c \
@@ -14,7 +14,7 @@ SRCS = $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 
 OBJ = ${SRCS:.c=.o}
 
-HEADERS = $(SRCS_DIR)fdf.h
+HEADERS = $(SRCS_DIR)cub.h
 
 # ========== libraries ==========
 LIB_DIR = ../libs

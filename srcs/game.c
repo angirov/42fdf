@@ -1,4 +1,4 @@
-#include "fdf.h"
+#include "cub.h"
 
 void	player_set_location(t_player *player, t_loc loc)
 {
