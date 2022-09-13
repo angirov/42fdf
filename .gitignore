@@ -1,5 +1,4 @@
 *.o
 *.vscode
 fdf
-libft_printf
-libs/libft_printf
+

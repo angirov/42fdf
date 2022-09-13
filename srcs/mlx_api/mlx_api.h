@@ -3,7 +3,6 @@
 
 # if defined(__linux__)
 #  include "libft.h"
-#  include "ft_printf.h"
 #  include <mlx.h>
 #  define KEY_ESC 65307
 #  define KEY_LEFT 65361
@@ -27,7 +26,6 @@
 # elif defined(__APPLE__)
 #  include "../libs/minilibx_macos/mlx.h"
 #  include "../libs/libft/libft.h"
-#  include "../libs/libft_printf/ft_printf.h"
 
 #  define KEY_ESC 53
 #  define KEY_LEFT 123

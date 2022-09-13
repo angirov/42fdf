@@ -25,16 +25,14 @@ MLX_LIB	=	mlx
 LIBFT_DIR = $(LIB_DIR)/libft
 LIBFT_A = $(LIBFT_DIR)/libft.a
 
-LIBFT_PRINTF_DIR = $(LIB_DIR)/libft_printf
-LIBFT_PRINTF_A = $(LIBFT_PRINTF_DIR)/libftprintf.a
 
-ALL_LIBS = $(LIBFT_PRINTF_A) $(LIBFT_A)
+ALL_LIBS = $(LIBFT_A)
 
 # ========== compilation ==========
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 MLX_FLAFS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
-INCLUDES_LOCAL = -I$(SRCS_DIR) -I$(LIBFT_DIR) -I$(LIBFT_PRINTF_DIR)
+INCLUDES_LOCAL = -I$(SRCS_DIR) -I$(LIBFT_DIR)
 # ========== rules ==========
 all: $(NAME)
 
@@ -45,8 +43,7 @@ all: $(NAME)
 # 	$(CC) $(CFLAGS) $(INCLUDES_LOCAL) -I/usr/include -Imlx_linux -c $< -o $@ 
 
 $(NAME): makelibs $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ)	-L$(LIBFT_PRINTF_DIR)	-lftprintf \
-							-L$(LIBFT_DIR)			-lft \
+	$(CC) $(CFLAGS) $(OBJ)	-L$(LIBFT_DIR)			-lft \
 							-L$(MLX_DIR) 			-l$(MLX_LIB) \
 							-L/usr/lib -lm -lz -framework OpenGL -framework AppKit \
 							-o $(NAME)
@@ -57,7 +54,6 @@ $(NAME): makelibs $(OBJ)
 makelibs:
 	make -C $(MLX_DIR)
 	make bonus -C $(LIBFT_DIR)
-	make -C $(LIBFT_PRINTF_DIR)
 
 clean: cleanlibs
 	rm $(OBJ)
@@ -67,11 +63,9 @@ fclean: fcleanlibs
 
 cleanlibs:
 	make clean -C $(LIBFT_DIR)
-	make clean -C $(LIBFT_PRINTF_DIR)
 
 fcleanlibs:
 	make fclean -C $(LIBFT_DIR)
-	make fclean -C $(LIBFT_PRINTF_DIR)
 
 test:
 	@echo $(OBJ)

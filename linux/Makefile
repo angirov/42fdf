@@ -22,11 +22,7 @@ LIB_DIR = ../libs
 LIBFT_DIR = $(LIB_DIR)/libft
 LIBFT_A = $(LIBFT_DIR)/libft.a
 
-
-LIBFT_PRINTF_DIR = $(LIB_DIR)/libft_printf
-LIBFT_PRINTF_A = $(LIBFT_PRINTF_DIR)/libftprintf.a
-
-ALL_LIBS = $(LIBFT_PRINTF_A) $(LIBFT_A)
+ALL_LIBS = $(LIBFT_A)
 
 # ========== compilation ==========
 CC = gcc
@@ -36,7 +32,7 @@ MODULES = 	mlx_api \
 			game
 MODULES_DIRS = $(addprefix $(SRCS_DIR), $(MODULES))
 MODULES_INCL = $(addprefix -I, $(MODULES_DIRS))
-INCLUDES_LOCAL = -I$(SRCS_DIR) -I$(LIBFT_DIR) -I$(LIBFT_PRINTF_DIR) $(MODULES_INCL)
+INCLUDES_LOCAL = -I$(SRCS_DIR) -I$(LIBFT_DIR) $(MODULES_INCL)
 # ========== rules ==========
 all: $(NAME)
 
@@ -48,7 +44,6 @@ $(NAME): $(OBJ)
 
 makelibs:
 	make bonus -C $(LIBFT_DIR)
-	make -C $(LIBFT_PRINTF_DIR)
 
 clean: cleanlibs
 	rm $(OBJ)
@@ -58,11 +53,9 @@ fclean: fcleanlibs
 
 cleanlibs:
 	make clean -C $(LIBFT_DIR)
-	make clean -C $(LIBFT_PRINTF_DIR)
 
 fcleanlibs:
 	make fclean -C $(LIBFT_DIR)
-	make fclean -C $(LIBFT_PRINTF_DIR)
 
 test:
 	@echo $(OBJ)
