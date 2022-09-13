@@ -1,4 +1,4 @@
-#include "game.h"
+#include "fdf.h"
 
 void	player_set_location(t_player *player, t_loc loc)
 {

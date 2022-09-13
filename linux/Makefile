@@ -2,16 +2,13 @@ NAME = fdf
 
 SRCS_DIR = ../srcs/
 SRCS_FILES =	main.c \
-				make_data.c \
-				read_map.c \
-				plotting.c \
-				rotation.c \
-				key_hooks.c \
-				projections.c \
-				exits_linux.c \
 				mlx_api/free_mlx.c \
-				game/game.c
-
+				drawing.c \
+				game.c \
+				key_hooks.c \
+				math.c \
+				minimap.c \
+				raycasting.c
 
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 

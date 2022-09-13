@@ -6,7 +6,7 @@
 /*   By: vangirov <vangirov@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 19:05:05 by vangirov          #+#    #+#             */
-/*   Updated: 2022/09/10 17:28:48 by vangirov         ###   ########.fr       */
+/*   Updated: 2022/09/13 10:48:29 by vangirov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@
 # include <stdlib.h>
 # include <stddef.h>
 # include <fcntl.h>
+# include <stdio.h>
+# include <math.h>
 
 # define _USE_MATH_DEFINES
-# include <math.h>
 # define SHIFT_VAL 100
 # define ANGLE_DIV 36
 
@@ -37,12 +38,12 @@
 // colors
 # define WHITE 0xffffff
 # define RED 0xe80c0c
-# define YELLOW 0xe69138
+# define YELLOW 0xffff00 // e69138
 # define GRAY 0x444444
 # define L_GRAY 0xbebebe
 
+
 # include "mlx_api.h"
-# include "game.h"
 
 typedef struct s_point
 {
@@ -60,88 +61,98 @@ typedef struct s_fpoint
 	int		color;
 }	t_fpoint;
 
-typedef struct s_fdf
+typedef struct s_map	t_map;
+typedef struct s_game	t_game;
+
+typedef struct s_loc
+{
+	double	x;
+	double	y;
+} t_loc;
+
+typedef struct s_player
+{
+	t_game	*game;
+	t_loc	loc;
+	double	direction;
+	double	rotation_rate;
+	double	speed;
+}	t_player;
+
+typedef struct s_grid
+{
+	int	heigth;
+	int	width;
+	int	scale;
+}	t_grid;
+
+typedef struct s_game
 {
 	t_graphics	*graphics;
-	int			width;
-	int			height;
-	t_point		**matrix;
-	int			zoom;
-	int			z_scale;
-	int			proj;
-	int			color;
-	float		angle;
-	int			pivot_x;
-	int			pivot_y;
-	int			offset_x;
-	int			offset_y;
-	int			shift_x;
-	int			shift_y;
-	float		alpha;
-	float		beta;
-	float		gamma;
+	t_player	*player;
+	t_grid		grid;
+	int			px_width;
+	int			px_heigth;
+	int			*map; //(*map)[24];  // https://stackoverflow.com/questions/1052818
+	t_loc		*ray_dirs;
+	double		*distances;
+	int			*sides;
+}	t_game;
 
-}	t_fdf;
+void	set_sizes(t_game *game, int width, int heigth, int scale);
+void	player_set_location(t_player *player, t_loc loc);
 
-# define WHITE 0xffffff
-# define RED 0xe80c0c
+// void	player_move_forward(t_player *player);
+// void	player_move_back(t_player *player);
+// void	player_move_right(t_player *player);
+// void	player_move_left(t_player *player);
+// void	player_turn_right(t_player *player);
+// void	player_turn_left(t_player *player);
 
+void	player_move_N(t_player *player);
+void	player_move_S(t_player *player);
+void	player_move_E(t_player *player);
+void	player_move_W(t_player *player);
 
+void	player_turn_right(t_player *player);
+void	player_turn_left(t_player *player);
+
+// math.c
+double	vec_len(t_loc vec);
+t_loc	norm_vec(t_loc vec);
+t_loc	dir2vec(double radians);
+t_loc	add_vecs(t_loc vec1, t_loc vec2);
+t_loc	sc_mult(t_loc vec, double scalar);
 double	rtd(double radians);
 double	dtr(double degrees);
+double	ft_abs(double num);
+double	ft_max(double a, double b);
 
+// drawing.c
+void	ft_put_pixel(t_graphics *graphics, int x, int y, int color);
+void	draw_line(t_loc l0, t_loc l1, int scale, int color, t_graphics *g);
+void	ft_plot_f_line(t_fpoint p0, t_fpoint p1, int color, t_graphics *g);
+void	ft_plot_line(t_point p0, t_point p1, int color, t_graphics *g);
+void	fill_sqare(t_game *g, t_loc corner, int side, int color);
+void	fill_rect(t_game *g, t_loc corner, int x, int y, int color);
 
-// make_data
-void	ft_check_input(int argc, char **argv);
-t_fdf	*ft_make_data(char *map_file_name);
+// minimap.c
+void	draw_rays(t_game *g);
+int map_value(t_game *g, int x, int y);
+void	fill_grid(t_game *g, int x, int y, int scale);
+void	map_background(t_game *g);
+void	draw_grid(t_game *g);
 
-// read_map.c
-int		get_height(const char *map_file_name);
-int		get_width(const char *map_file_name);
-void	ft_init_point(t_point *p, int x, int y, int z);
-void	fill_matrix(const char *map_file_name, \
-					t_fdf *data, int height, int width);
-void	read_map(const char *map_file_name, t_fdf *data);
+// raycasting.c
+void cast_rays(t_player	*p);
 
 // key_hooks.c
 int		deal_key(int key, t_game *game);
-void	ft_proj_isometric(t_fdf *data);
-void	ft_proj_parallel(t_fdf *data);
 
-// ploting.c
-void	ft_plot_map(t_fdf *data);
-t_point	ft_set_point(t_point p, t_fdf *data);
-void	ft_plot_line(t_point p0, t_point p1, int color, t_graphics *g);
-int		ft_line_color(t_fpoint p0, t_fpoint p1);
-void	ft_put_pixel(t_graphics *graphics, int x, int y, int color);
-
-// read_map.c
-void	read_map(const char *map_file_name, t_fdf *data);
-int		get_height(const char *map_file_name);
-int		get_width(const char *file_name);
-int		ft_set_color(int z);
-void	ft_init_point(t_point *p, int x, int y, int z);
-void	fill_matrix(const char *map_file_name, \
-					t_fdf *data, int height, int width);
-
-/* rotation.c */
-void	x_rotate(int *y, int *z, float alpha);
-void	y_rotate(int *x, int *z, float beta);
-void	z_rotate(int *x, int *y, float gamma);
-void	ft_scale_point(t_point *p, t_fdf *data);
-void	ft_shift_point(t_point *p, t_fdf *data);
-
-/* projection.c */
-void	ft_reset_angles(t_fdf *data);
-void	ft_isometric(int *x, int *y, int *z);
-void	ft_cabinet(int *x, int *y, int *z);
-double	ft_abs(double a);
-float	ft_max(float a, float b);
-
-// exit.c
-void	ft_error(t_fdf *data, char *message);
-void	ft_escape(t_fdf *data);
-void	ft_free_data(t_fdf *data);
-int		ft_destroy(t_fdf *data);
+// exit.c //////////////////////////////////////////////////////
+// void	ft_error(t_fdf *data, char *message);
+// void	ft_escape(t_fdf *data);
+// void	ft_free_data(t_fdf *data);
+// int		ft_destroy(t_fdf *data);
 
 #endif
